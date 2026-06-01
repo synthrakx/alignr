@@ -15,3 +15,6 @@ venv/
 dist/
 build/
 *.egg-info/
+.env.backup
+setup_verification_final.py
+test_neon.py
