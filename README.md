@@ -1,6 +1,8 @@
 # ALIGNR
 ## AI Cognitive Alignment Trainer
 
+**Status:** Day 8 of 90 — building in public. Launching June 28, 2026.
+
 > How well does your thinking align with AI? Track it over 60 days.
 
 ALIGNR measures cognitive alignment between your pre-AI reasoning and 

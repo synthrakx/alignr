@@ -1,4 +1,4 @@
-__pycache__/
+﻿__pycache__/
 *.pyc
 *.pyo
 .env
@@ -18,3 +18,4 @@ build/
 .env.backup
 setup_verification_final.py
 test_neon.py
+alignr_sessions.json
