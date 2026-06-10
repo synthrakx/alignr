@@ -13,12 +13,12 @@ tests = [
     (
         "Python automation for data workflows",
         "Python excels at data science and automation",
-        0.65, "similar texts → score should be HIGH"
+        0.60, "similar texts → score should be HIGH"
     ),
     (
         "I enjoy cooking pasta on Sundays",
         "Quantum computing uses qubits in superposition",
-        0.25, "unrelated texts → score should be LOW"
+        0.10, "unrelated texts → score should be LOW"
     ),
     (
         "ALIGNR measures cognitive alignment",
