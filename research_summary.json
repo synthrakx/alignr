@@ -1,0 +1,16 @@
+{
+  "total_users": 50,
+  "feedback_users": 36,
+  "control_users": 14,
+  "group_comparison": {
+    "feedback_n": 36,
+    "feedback_avg": 0.5,
+    "control_n": 14,
+    "control_avg": 0.5,
+    "t_stat": NaN,
+    "p_value": NaN,
+    "cohens_d": 0.0,
+    "significant": false
+  },
+  "exported_at": "2026-06-11T00:46:49.581419"
+}
