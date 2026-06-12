@@ -1,7 +1,7 @@
 {
   "project": "ALIGNR \u2014 Reasoning Alignment Research Platform",
   "data_type": "SIMULATED \u2014 word-overlap proxy. Real semantic similarity (sentence-transformers all-MiniLM-L6-v2) activates on Day 15, producing realistic effect sizes in the d=0.5-1.5 range typical of cognition research.",
-  "exported_at": "2026-06-13T00:31:00.442024",
+  "exported_at": "2026-06-13T01:47:28.417087",
   "study_design": {
     "type": "randomized_controlled",
     "assignment": "deterministic_hash_of_email",

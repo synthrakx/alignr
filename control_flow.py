@@ -9,7 +9,7 @@ sessions = [
 
 # For loop with trend arrow (used in ALIGNR dashboard)
 for i, s in enumerate(sessions):
-    trend = "↑" if i > 0 and s["ras"] > sessions[i-1]["ras"] else "→"
+    trend = "↑" if i > 0 and s["ras"] > sessions[i - 1]["ras"] else "→"
     print(f"Day {s['day']:2d}: RAS={s['ras']:.1%} {trend}")
 
 # Average (used everywhere)

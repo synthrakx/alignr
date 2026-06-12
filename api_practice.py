@@ -4,6 +4,7 @@
 
 import requests
 
+
 def get_patna_weather() -> dict:
     """
     Fetches current weather for Patna.
@@ -13,12 +14,8 @@ def get_patna_weather() -> dict:
     try:
         r = requests.get(
             "https://api.open-meteo.com/v1/forecast",
-            params={
-                "latitude": 25.5941,
-                "longitude": 85.1376,
-                "current_weather": True
-            },
-            timeout=10
+            params={"latitude": 25.5941, "longitude": 85.1376, "current_weather": True},
+            timeout=10,
         )
         r.raise_for_status()
         return r.json()
@@ -29,11 +26,16 @@ def get_patna_weather() -> dict:
 
     except requests.exceptions.HTTPError as e:
         # Different message: includes the status code
-        return {"error": f"Server returned HTTP {e.response.status_code}. Try again later."}
+        return {
+            "error": f"Server returned HTTP {e.response.status_code}. Try again later."
+        }
 
     except requests.exceptions.ConnectionError:
         # Different message: no internet vs server error
-        return {"error": "No internet connection. ALIGNR runs locally — this API is optional."}
+        return {
+            "error": "No internet connection. ALIGNR runs locally — this API is optional."
+        }
+
 
 result = get_patna_weather()
 print(result)

@@ -1,7 +1,7 @@
 # ALIGNR
 ## AI Cognitive Alignment Trainer
 
-**Status:** Day 11 of 90 — building in public. Launching June 28, 2026.
+**Status:** Day 12 of 90 — building in public. Launching June 28, 2026.
 
 > How well does your thinking align with AI? Track it over 60 days.
 
@@ -51,6 +51,41 @@ Run the simulation locally with: python alignr_simulation.py
 
 ---
 
+## API — FastAPI Backend (Day 12)
+
+The ALIGNR backend exposes the research system as a documented REST API.
+Privacy is enforced at the API boundary: text enters the request body,
+is processed, and is discarded. It does not appear in any response.
+
+**4 endpoints:**
+
+- POST /session — record a session, returns RAS/CII/SCS scores
+- GET  /user/{email_hash} — retrieve user history (no text returned)
+- GET  /research/stats — aggregate study statistics
+- GET  /health — server status with privacy claim
+
+**Run the backend locally:** uvicorn fastapi_alignr_v1:app --reload
+
+**Open the Swagger UI:** http://localhost:8000/docs
+
+**Run automated tests:** python test_api.py
+
+The test script verifies all 4 endpoints AND asserts that no input text
+appears in any response body. Privacy is proven empirically, not just
+documented.
+
+---
+
+## Quality & Testing
+
+- All Python files formatted with black (industry standard)
+- Type hints across all function signatures
+- Privacy assertions in: oop_alignr.py, test_api.py, alignr_simulation.py
+- 4/4 API endpoints verified with automated tests
+- 2,000 simulated sessions processed without text persistence
+
+---
+
 ## Research Basis
 
 - CHI 2026: Pre-AI reflection improves critical thinking outcomes
@@ -76,6 +111,12 @@ Your text is never stored. Only alignment scores (numbers) are kept.
 - Zero raw user sentences in the export
 - 2,000+ text inputs processed in tests, zero persisted
 
+**API-level proof:**
+
+- POST /session response body verified to contain no input strings
+- Test in test_api.py runs the assertion automatically
+- Anyone can clone the repo, run the test, and verify the claim
+
 Analysis runs on local AI (Ollama) — nothing sent to OpenAI.
 
 ---
@@ -85,9 +126,11 @@ Analysis runs on local AI (Ollama) — nothing sent to OpenAI.
 - **ALIGNRSession** — one interaction, metrics extracted, text discarded
 - **ALIGNRUser** — one participant, identified by SHA-256 email hash
 - **ALIGNRResearch** — the entire study, group comparison, export
+- **FastAPI layer** — exposes the system via 4 documented endpoints
 
 The class hierarchy lives in oop_alignr.py. The portfolio simulation
-that uses it end-to-end lives in alignr_simulation.py.
+that uses it end-to-end lives in alignr_simulation.py. The API
+wrapping it lives in fastapi_alignr_v1.py.
 
 ---
 

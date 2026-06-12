@@ -6,13 +6,15 @@ from datetime import datetime
 
 DATA_FILE = Path("alignr_sessions.json")
 
+
 def word_overlap_ras(t1: str, t2: str) -> float:
     w1, w2 = set(t1.lower().split()), set(t2.lower().split())
     return len(w1 & w2) / len(w1 | w2) if w1 | w2 else 0.0
 
-pre  = input("Pre-thinking: ")
+
+pre = input("Pre-thinking: ")
 pred = input("Prediction: ")
-ai   = input("AI output: ")
+ai = input("AI output: ")
 task = input("Task type [technical/decision/research]: ")
 
 ras = word_overlap_ras(pre, ai)
