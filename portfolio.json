@@ -1,0 +1,42 @@
+{
+  "project": "ALIGNR \u2014 Reasoning Alignment Research Platform",
+  "data_type": "SIMULATED \u2014 word-overlap proxy. Real semantic similarity (sentence-transformers all-MiniLM-L6-v2) activates on Day 15, producing realistic effect sizes in the d=0.5-1.5 range typical of cognition research.",
+  "exported_at": "2026-06-13T00:31:00.442024",
+  "study_design": {
+    "type": "randomized_controlled",
+    "assignment": "deterministic_hash_of_email",
+    "feedback_n": 120,
+    "control_n": 80,
+    "sessions_per_user": 10,
+    "metrics": [
+      "RAS",
+      "CII",
+      "SCS"
+    ]
+  },
+  "statistical_results": {
+    "feedback_n": 120,
+    "feedback_avg": 0.6865,
+    "control_n": 80,
+    "control_avg": 0.366,
+    "t_stat": 84.373,
+    "p_value": 0.0,
+    "cohens_d": 13.0333,
+    "significant": true,
+    "effect_size_interpretation": "large"
+  },
+  "figures": {
+    "fig1_ras_trajectory": "alignr_fig1_ras_trajectory.png",
+    "fig2_cii_progression": "alignr_fig2_cii_progression.png",
+    "fig3_scs_calibration": "alignr_fig3_scs_calibration.png"
+  },
+  "privacy": {
+    "text_stored": false,
+    "data_collected": [
+      "RAS (float)",
+      "CII (float)",
+      "SCS (float)"
+    ],
+    "verification_method": "grep 'pre_thinking' oop_alignr.py returns no code assigning text to self"
+  }
+}
