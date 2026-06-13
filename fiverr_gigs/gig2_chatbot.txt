@@ -1,0 +1,124 @@
+============================================================
+GIG 2: AI CHATBOT FOR YOUR WEBSITE
+============================================================
+
+TITLE:
+I will build a custom AI chatbot for your website or business
+
+CATEGORY:
+Programming & Tech → AI Applications
+
+============================================================
+DESCRIPTION (paste in Fiverr description field):
+============================================================
+
+YOUR CUSTOMERS SHOULDN'T WAIT FOR ANSWERS. YOUR AI CAN ANSWER INSTANTLY.
+
+I build custom AI chatbots that know your business, answer your customers'
+questions 24/7, and integrate with your existing tools — no coding required on your end.
+
+WHAT YOUR CHATBOT CAN DO:
+✅ Answer product/service questions instantly (trained on your content)
+✅ Qualify leads and capture contact information
+✅ Book appointments and check availability
+✅ Handle FAQs so your team handles complex issues only
+✅ Escalate to human when needed (smooth handoff)
+✅ Work in any language
+✅ Deploy on website, WhatsApp, Telegram, or Facebook Messenger
+
+TECH I USE:
+→ Flowise / Dify (no-code, easy to update yourself later)
+→ OpenAI GPT-4 or local AI models (your choice)
+→ Your existing documentation, FAQs, and website as the knowledge base
+→ Clean embed code — works on any website in 5 minutes
+
+WHAT YOU GET:
+📦 Fully trained chatbot (knows your specific business)
+🔧 Embed code or deployment instructions
+📚 How-to guide so you can update it yourself
+💬 Test conversation log showing it works
+🔄 Revisions until it answers correctly
+
+PROOF OF WORK:
+I built the ALIGNR API — a documented, privacy-first AI backend with
+3 endpoints, Pydantic validation, and Swagger documentation.
+Every chatbot I deliver is tested, documented, and explainable.
+
+PERFECT FOR:
+→ Small businesses tired of answering the same questions
+→ E-commerce stores with product questions
+→ Service businesses (clinics, salons, real estate)
+→ Any business wanting 24/7 customer support
+
+Message me with your use case and I'll tell you exactly what I'll build.
+Delivery typically 2-3 days. Questions answered within 2 hours.
+
+============================================================
+PACKAGES:
+============================================================
+
+BASIC — $75
+Simple FAQ chatbot (up to 20 Q&A pairs)
+Website embed code
+1 platform (website only)
+1 revision
+Delivery: 2 days
+
+STANDARD — $150
+Knowledge-base chatbot (trained on your documents/website)
+Deploy on 2 platforms
+Lead capture integration
+3 revisions
+Delivery: 3 days
+
+PREMIUM — $280
+Full AI assistant (documents + live web knowledge)
+Deploy on all platforms
+CRM integration
+Custom personality/tone
+5 revisions + 14-day support
+Delivery: 5 days
+
+============================================================
+FAQ (add each as separate Q&A in Fiverr FAQ section):
+============================================================
+
+Q: Do I need to know anything technical to use the chatbot?
+A: No. I handle everything. You get a working chatbot and a simple
+   guide to update it yourself if needed.
+
+Q: Can the chatbot handle my specific industry?
+A: Yes. I train it on your exact content — FAQs, pricing, policies,
+   product details. It knows your business, not a generic template.
+
+Q: What platform does the chatbot run on?
+A: I build on Flowise or Dify — open-source tools you can host yourself
+   or I can deploy for you. Your data stays under your control.
+
+Q: Can I update the chatbot after delivery?
+A: Yes. The visual editor means you can add new Q&As in minutes.
+   I'll show you how in the included guide.
+
+Q: Is my business data safe?
+A: Yes. I use local AI options where possible. Nothing is sent to
+   third-party servers without your explicit consent.
+
+============================================================
+GALLERY IMAGE (upload to Fiverr gallery):
+============================================================
+
+Use: portfolio_swagger_docs.png
+Why: shows real documented API — proves AI backend competence visually.
+
+============================================================
+REQUIREMENTS (Fiverr buyer Q&A):
+============================================================
+
+1. What does your business do? (2-3 sentences)
+2. What questions do customers ask most often?
+3. Where do you want the chatbot deployed?
+4. Do you have existing documentation or FAQs I can train it on?
+
+============================================================
+END OF GIG 2
+============================================================

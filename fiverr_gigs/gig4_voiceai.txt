@@ -1,0 +1,140 @@
+============================================================
+GIG 4: VOICE AI AGENT FOR YOUR BUSINESS
+============================================================
+
+TITLE:
+I will build a voice AI agent that handles your customer calls 24/7
+
+CATEGORY:
+Programming & Tech → AI Applications
+
+============================================================
+DESCRIPTION (paste in Fiverr description field):
+============================================================
+
+YOUR PHONE LINES SHOULDN'T GO UNANSWERED AT 2AM.
+
+I build voice AI agents that answer your business calls, handle bookings,
+answer FAQs, and qualify leads — all automatically, all day and night.
+
+REAL EXAMPLE:
+"Thank you for calling Raj's Dental Clinic. I'm the clinic's AI assistant.
+Are you calling to schedule an appointment, or do you have a question about
+our services?" → books the appointment → sends confirmation → done.
+
+YOUR VOICE AI HANDLES:
+✅ Appointment booking and reminders
+✅ FAQ answering (hours, pricing, location, services)
+✅ Lead qualification (collects name, number, requirement)
+✅ After-hours calls (never miss a lead again)
+✅ Call routing (sends complex issues to human staff)
+✅ Multi-language support
+
+BUSINESS TYPES I BUILD FOR:
+→ Medical clinics (appointment booking, prescription queries)
+→ Real estate agencies (property inquiries, viewing bookings)
+→ Restaurants (reservations, menu questions, hours)
+→ Salons and spas (bookings, pricing, availability)
+→ Law firms (consultation scheduling, basic intake)
+→ Any service business with repetitive inbound calls
+
+PROOF OF WORK:
+Watch the demo video above — that is the exact system I build.
+Real voice AI, real conversation, real booking flow.
+Built with Pipecat + faster-whisper + local LLM + Kokoro TTS.
+Privacy-first: runs locally, your call data stays on your server.
+
+WHAT YOU GET:
+📞 Working phone number (in your country) with AI answering
+🧠 AI trained on your specific business information
+📊 Call logs and conversation summaries
+🔧 Instructions to update the AI's knowledge base
+🔄 Revisions until it sounds right for your brand
+
+HOW IT WORKS:
+1. You share your business info (FAQs, pricing, policies)
+2. I build and train the voice AI on your content
+3. You get a phone number to test (sounds like your business)
+4. I refine until you're happy
+5. You forward your existing number or use the new one
+
+This is not a script. This is a real AI that understands natural conversation.
+Ready to stop losing calls to voicemail?
+
+============================================================
+PACKAGES:
+============================================================
+
+BASIC — $180
+Voice AI with FAQ answering
+One phone number
+Train on up to 20 FAQs
+Business hours + after-hours
+2 revisions
+Delivery: 3 days
+
+STANDARD — $380
+Full voice AI agent with booking integration
+Train on complete business knowledge base
+Calendar/booking system connected
+Lead capture and CRM integration
+4 revisions
+Delivery: 4-5 days
+
+PREMIUM — $680
+Complete voice AI system
+Multiple phone lines
+Advanced integrations (CRM, booking, SMS follow-up)
+Custom voice selection
+Staff training session
+6 revisions + 30-day support
+Delivery: 7 days
+
+============================================================
+FAQ (add each as separate Q&A in Fiverr FAQ section):
+============================================================
+
+Q: Will it sound like a robot?
+A: Modern voice AI sounds remarkably natural. Watch the demo video above —
+   that's the exact system I build. Most people can't tell it's AI on the first call.
+
+Q: What happens if the AI doesn't know the answer?
+A: It will politely say "Let me get someone from the team to answer that"
+   and route to a human. It never makes up information.
+
+Q: Is there a monthly cost after setup?
+A: Yes, there's a small monthly cost for the phone number and AI calls
+   (typically $20-80/month depending on call volume). This is your cost —
+   far less than missing calls or hiring a receptionist.
+
+Q: Can I update what the AI knows?
+A: Yes. I'll show you how to update the knowledge base in 5 minutes.
+   No technical skills needed.
+
+Q: Do you serve businesses outside India?
+A: Yes. I build for US, UK, Canada, Australia, and India businesses.
+   All time zones handled — the AI runs 24/7 regardless of your location.
+
+============================================================
+GALLERY (upload to Fiverr gallery):
+============================================================
+
+Primary: voice_demo.mp4 (record in Block C-D today)
+Secondary: portfolio_oop_alignr.png
+
+NOTE: Gig 4 cannot go live without voice_demo.mp4.
+Record it in Block C-D before Day 14.
+
+============================================================
+REQUIREMENTS (Fiverr buyer Q&A):
+============================================================
+
+1. What type of business do you have?
+2. What are the top 5 questions customers call about?
+3. Do you need appointment booking integrated?
+4. What country are you based in? (for phone number setup)
+5. What hours is your business open?
+
+============================================================
+END OF GIG 4
+============================================================

@@ -1,0 +1,120 @@
+============================================================
+GIG 1: PYTHON AUTOMATION SCRIPTS
+============================================================
+
+TITLE:
+I will build a custom Python automation script for any task
+
+CATEGORY:
+Programming & Tech → Web Programming → Python
+
+============================================================
+DESCRIPTION (paste in Fiverr description field):
+============================================================
+
+TIRED OF DOING THE SAME TASK MANUALLY EVERY DAY?
+
+I build custom Python scripts that automate exactly what you need — from 
+file organization to data processing to web scraping to Excel automation.
+
+WHAT I BUILD:
+✅ File and folder automation (rename, sort, organize thousands of files)
+✅ Data processing (CSV, Excel, JSON — clean, transform, export)
+✅ Web scraping (extract data from any website into spreadsheet)
+✅ Email automation (send bulk emails with personalized content)
+✅ PDF processing (extract text, merge, split, fill forms)
+✅ API integrations (connect any two tools that have APIs)
+✅ Report generation (auto-generate reports from raw data)
+✅ Database automation (SQLite, CSV, Excel database operations)
+
+WHY CHOOSE ME:
+🔒 Privacy-first approach — your data stays secure
+⚡ Fast delivery — most scripts in 1-2 days
+📝 Clean, documented code — you can understand and modify it
+🔄 Revisions included — won't stop until it works perfectly for you
+
+HOW IT WORKS:
+1. Tell me exactly what you do manually right now
+2. I build the script and test it on sample data
+3. You get working code + instructions to run it
+4. If anything needs tweaking, I fix it immediately
+
+WHAT I NEED FROM YOU:
+→ Description of the task you want automated
+→ Sample input data (a few rows is fine)
+→ Expected output format
+→ Any specific requirements or constraints
+
+I've built 15+ automation scripts including a complete research data
+pipeline for a 200-user A/B study. Every project comes with documentation
+so you can run it yourself.
+
+Questions? Message me before ordering — I respond within 2 hours.
+
+============================================================
+PACKAGES:
+============================================================
+
+BASIC — $40
+Simple automation script (one task)
+Up to 100 lines of code
+1 data source
+Basic error handling
+1 revision
+Delivery: 2 days
+
+STANDARD — $85
+Complex automation script
+Up to 300 lines of code
+Multiple data sources
+Full error handling + logging
+3 revisions
+Delivery: 3 days
+
+PREMIUM — $160
+Complete automation system
+Unlimited complexity
+GUI interface (optional)
+Full documentation
+5 revisions + 7-day support
+Delivery: 5 days
+
+============================================================
+FAQ (add each as separate Q&A in Fiverr FAQ section):
+============================================================
+
+Q: Do I need to know Python to use the script?
+A: No. I deliver the script with clear instructions: open terminal, run one command, done.
+
+Q: What if the script doesn't work on my computer?
+A: I test everything before delivery. If something breaks on your side, I fix it for free.
+
+Q: Can you work with my existing code?
+A: Yes. Share it with me and I'll build on top of what you have.
+
+Q: Do you sign NDAs?
+A: Yes, I'm happy to sign an NDA for sensitive projects.
+
+Q: What data do you keep from my project?
+A: Nothing. I delete all your data immediately after delivery. Privacy is my priority.
+
+============================================================
+GALLERY IMAGE (upload to Fiverr gallery):
+============================================================
+
+Use: portfolio_simulation_figure.png
+Why: shows code + research-grade figure side-by-side, 
+     proves Python competence visually.
+
+============================================================
+REQUIREMENTS (Fiverr requires you fill these in buyer Q&A):
+============================================================
+
+1. What task do you want automated? (be specific)
+2. Can you share sample input data?
+3. What should the output look like?
+4. Any specific tools/platforms involved?
+
+============================================================
+END OF GIG 1
+============================================================

@@ -1,0 +1,128 @@
+============================================================
+GIG 3: N8N WORKFLOW AUTOMATION
+============================================================
+
+TITLE:
+I will build n8n automation workflows to save you hours every week
+
+CATEGORY:
+Programming & Tech → Databases
+
+============================================================
+DESCRIPTION (paste in Fiverr description field):
+============================================================
+
+STOP DOING MANUALLY WHAT A WORKFLOW CAN DO FOR YOU.
+
+I build n8n automation workflows that connect your apps and automate
+repetitive tasks — the open-source Zapier that saves you $49/month
+while doing more than the paid tools.
+
+WHAT I AUTOMATE:
+✅ Lead management (CRM updates, notifications, follow-ups)
+✅ Email automation (triggers, responses, campaigns)
+✅ Social media posting (schedule and cross-post automatically)
+✅ Data sync (keep databases, spreadsheets, and apps in sync)
+✅ Invoice and billing automation
+✅ Customer onboarding sequences
+✅ Report generation (weekly/monthly, auto-emailed to you)
+✅ Zapier/Make migrations (switch to n8n and save monthly fees)
+
+WHY N8N OVER ZAPIER:
+→ Self-hosted = your data never leaves your server
+→ No per-task pricing = unlimited automations, flat cost
+→ More powerful logic = conditional flows, loops, custom code
+→ One-time setup = runs forever without monthly subscription
+
+PROOF OF WORK:
+I built a complete data pipeline for ALIGNR — a 200-user research
+platform with automated statistical analysis, figure generation, and
+privacy-verified JSON export. The same pipeline logic applies to any
+n8n workflow I build for you.
+
+WHAT YOU GET:
+📋 Complete n8n workflow (JSON file you own forever)
+🔗 All integrations configured and tested
+📝 Documentation showing exactly what the workflow does
+▶️ Video walkthrough so you understand every step
+🔄 Revisions until it runs perfectly
+
+PERFECT FOR:
+→ Businesses paying $50-500/month on Zapier/Make (switch and save)
+→ Agencies managing multiple clients' automation
+→ Solopreneurs who want everything running while they sleep
+
+Tell me what you do manually that takes more than 30 minutes per week.
+I'll tell you if automation will save you significant time.
+
+============================================================
+PACKAGES:
+============================================================
+
+BASIC — $100
+Simple workflow (2-3 apps connected)
+1 trigger + 1 action flow
+Basic error handling
+1 revision
+Delivery: 2 days
+
+STANDARD — $220
+Complex workflow (up to 6 apps)
+Multiple trigger conditions
+Error handling + notifications
+Loom walkthrough video
+3 revisions
+Delivery: 3-4 days
+
+PREMIUM — $420
+Complete automation system (unlimited apps)
+Multiple workflows connected
+Dashboard for monitoring
+Team training session (30 min)
+5 revisions + 30-day support
+Delivery: 5-7 days
+
+============================================================
+FAQ (add each as separate Q&A in Fiverr FAQ section):
+============================================================
+
+Q: Do I need to host n8n myself?
+A: No. I can set it up on your existing server, or recommend a simple
+   $5/month host that takes 10 minutes to set up. I'll guide you through it.
+
+Q: What if I already use Zapier/Make? Can you migrate?
+A: Yes. I'll recreate all your existing workflows in n8n and test each one.
+   Most clients save $30-200/month by switching.
+
+Q: Can I update the workflows myself after delivery?
+A: Yes. n8n has a visual editor — once I build it, you can modify it.
+   I'll show you how in the included Loom video.
+
+Q: What apps and tools can you connect?
+A: n8n supports 400+ integrations including Google Sheets, Notion,
+   Slack, Gmail, Airtable, Stripe, HubSpot, and any tool with an API.
+
+Q: Is my data safe during the build process?
+A: Yes. I work with sample/test data during development. Your live
+   data only touches the workflow after you approve and deploy it.
+
+============================================================
+GALLERY IMAGE (upload to Fiverr gallery):
+============================================================
+
+Use: portfolio_simulation_figure.png
+Why: shows data pipeline output — proves automation and data
+     processing competence visually.
+
+============================================================
+REQUIREMENTS (Fiverr buyer Q&A):
+============================================================
+
+1. What task do you want automated?
+2. Which apps/tools need to be connected?
+3. How often should the workflow run?
+4. Do you already have n8n installed, or need help with setup?
+
+============================================================
+END OF GIG 3
+============================================================
