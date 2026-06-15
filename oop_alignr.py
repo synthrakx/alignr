@@ -1,6 +1,7 @@
 # oop_alignr.py
 # UCA Self-Consistency result: text is method-local, never stored.
 # Privacy is enforced at the class design level.
+# Day 15: real engine integrated (sentence-transformers all-MiniLM-L6-v2)
 
 import datetime
 import hashlib
@@ -8,6 +9,7 @@ import json
 from pathlib import Path
 import numpy as np
 from scipy import stats
+from backend.nlp_engine import calculate_ras, calculate_cii, calculate_scs
 
 
 class ALIGNRSession:
@@ -15,7 +17,7 @@ class ALIGNRSession:
     Privacy architecture: text parameters enter calculate(), metrics are extracted,
     text is discarded. Nothing stored to self from text inputs. Ever.
 
-    This is provable: grep "self.pre" in this file → 0 results.
+    This is provable: grep "self.pre" in this file returns 0 results.
     This is the privacy claim in every researcher email and fellowship application.
     """
 
@@ -33,24 +35,22 @@ class ALIGNRSession:
     ) -> dict:
         """
         Text enters here as parameters. Metrics extracted. Text discarded.
-        pre_thinking, ai_output, prediction: method-local only.
+        Day 15: real semantic engine (sentence-transformers all-MiniLM-L6-v2).
+        Replaces word_overlap_ras + TTK-only CII from Days 8-14.
+
+        Privacy: pre_thinking, ai_output, prediction are method-local only.
         After this returns: they're gone. Garbage collected. Unrecoverable.
         """
-        # RAS: word overlap (Day 15: sentence-transformers replaces this)
-        w1 = set(pre_thinking.lower().split())
-        w2 = set(ai_output.lower().split())
-        self.ras = len(w1 & w2) / len(w1 | w2) if w1 | w2 else 0.0
+        try:
+            ras_result = calculate_ras(pre_thinking, ai_output)
+            self.ras = ras_result["ras"]
+        except ValueError:
+            self.ras = 0.0
 
-        # CII: vocabulary diversity proxy (file 11 full formula → Day 15)
-        # Day 9 version: TTK only (simplified for now)
-        # Day 15 version: (ttk * 0.6) + (min(avg_len / 20, 1.0) * 0.4)
-        words = pre_thinking.lower().split()
-        self.cii = len(set(words)) / len(words) if words else 0.5
+        self.cii = calculate_cii(pre_thinking)
 
-        # SCS: prediction accuracy
-        if prediction:
-            wp = set(prediction.lower().split())
-            self.scs = len(wp & w2) / len(wp | w2) if wp | w2 else 0.0
+        scs_result = calculate_scs(prediction, ai_output)
+        self.scs = scs_result.get("scs")
 
         return self.to_dict()
 
@@ -100,16 +100,11 @@ class ALIGNRUser:
         self.sessions.append(session)
 
 
-# ADD TO BOTTOM OF oop_alignr.py (after ALIGNRUser class)
-# This completes the class hierarchy:
-# ALIGNRSession → ALIGNRUser → ALIGNRResearch
-
-
 class ALIGNRResearch:
     """
     Manages the complete A/B study.
     Privacy: text never enters or leaves this class.
-    Only floats. export_summary() → open it → verify no text keys.
+    Only floats. export_summary() then open it then verify no text keys.
     """
 
     def __init__(self):
@@ -176,14 +171,13 @@ class ALIGNRResearch:
             "exported_at": datetime.datetime.now().isoformat(),
         }
         Path(path).write_text(json.dumps(data, indent=2))
-        print(f"Exported → {path}")
+        print(f"Exported to {path}")
         print("Open it. Verify: ZERO text keys anywhere in this file.")
         return data
 
 
 if __name__ == "__main__":
 
-    # ── ORIGINAL PRIVACY TEST ──────────────────────────────────────────
     session = ALIGNRSession("user_abc123", "technical", 1)
     result = session.calculate(
         pre_thinking="Python is great for data analysis and machine learning",
@@ -198,7 +192,7 @@ if __name__ == "__main__":
     assert "pre_thinking" not in result, "PRIVACY VIOLATION: text stored!"
     assert "ai_output" not in result, "PRIVACY VIOLATION: text stored!"
     assert "prediction" not in result, "PRIVACY VIOLATION: text stored!"
-    print("✅ Privacy test: PASSED — no text keys in to_dict()")
+    print("Privacy test PASSED — no text keys in to_dict()")
 
     print("\n=== repr ===")
     print(repr(session))
@@ -209,22 +203,27 @@ if __name__ == "__main__":
     print(f"User: {user.user_id} | Group: {user.study_group}")
     print(f"Avg RAS: {user.average_ras:.3f} | Trend: {user.ras_trend}")
 
-    print("\n=== GREP CHECK ===")
-    print("Run in terminal: grep -n 'self.pre' oop_alignr.py")
-    print("Expected result: (no output) — zero matches = privacy confirmed")
-
-    # ── ALIGNRRESEARCH INTEGRATION TEST ───────────────────────────────
     print("\n=== ALIGNRResearch integration test ===")
     research = ALIGNRResearch()
 
+    text_variations = [
+        ("Python is useful for automation and data analysis tasks",
+         "Python excels at data automation workflows and analysis"),
+        ("Machine learning identifies patterns in historical datasets",
+         "ML algorithms detect statistical patterns in training data"),
+        ("Pre-AI reflection improves reasoning quality significantly",
+         "Structured pre-task reflection enhances cognitive engagement"),
+    ]
+
     for i in range(50):
         email = f"user{i}@test.com"
-        for _ in range(5):
+        for j in range(5):
+            pre, ai = text_variations[j % len(text_variations)]
             research.add_session(
                 email=email,
-                pre="Python is useful for automation and data analysis",
-                ai="Python excels at data automation and analysis",
-                pred="AI will mention automation",
+                pre=pre,
+                ai=ai,
+                pred="AI will mention the topic",
                 task="technical",
             )
 

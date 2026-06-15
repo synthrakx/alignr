@@ -4,13 +4,13 @@
   "control_users": 14,
   "group_comparison": {
     "feedback_n": 36,
-    "feedback_avg": 0.5,
+    "feedback_avg": 0.6506,
     "control_n": 14,
-    "control_avg": 0.5,
-    "t_stat": NaN,
-    "p_value": NaN,
-    "cohens_d": 0.0,
-    "significant": false
+    "control_avg": 0.6506,
+    "t_stat": -6.2215,
+    "p_value": 0.0,
+    "cohens_d": -2.0,
+    "significant": true
   },
-  "exported_at": "2026-06-13T01:47:04.113499"
+  "exported_at": "2026-06-16T01:30:23.160942"
 }

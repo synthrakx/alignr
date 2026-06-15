@@ -11,7 +11,7 @@ Services: cleanings, fillings, extractions, whitening.
 Keep responses under 25 words. No emojis. No special characters.
 If someone wants to book: ask name, day, and phone number."""
 
-MODEL_NAME = "qwen3-baby:latest"
+MODEL_NAME = "qwen2.5-coder:7b"
 MIC_INDEX = 1
 RATE = 16000
 CHUNK = 1024

@@ -19,3 +19,10 @@ build/
 setup_verification_final.py
 test_neon.py
 alignr_sessions.json
+.aider*
+# Audio test artifacts (not part of project)
+mic_test.wav
+temp.wav
+
+# Misnamed voice demo (real one is voice_demo.mp4)
+voice_demo.mp4.mp4
