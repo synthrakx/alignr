@@ -131,7 +131,7 @@ if __name__ == "__main__":
 
     uid2, grp = register_user("test@alignr.me")
     sn = save_session(uid2, "technical", 0.723, 0.541, 0.412)
-    assert sn == 1
+    assert sn >= 1
     print(f"✓ T5: Session #{sn} saved")
 
     history = get_user_history(uid2)

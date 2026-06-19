@@ -1,8 +1,7 @@
 """
 alignr/frontend/app.py
-ALIGNR Streamlit Frontend v1 — functional, not beautiful.
-Goal: data flows. User sees scores.
-Day 18 — June 18, 2026
+ALIGNR Streamlit Frontend v2 — with consent gate.
+Day 19 — June 19, 2026
 Run: streamlit run alignr/frontend/app.py
 """
 import hashlib
@@ -11,6 +10,8 @@ import requests
 import pandas as pd
 
 API_BASE = "http://localhost:8000"
+ETHICS_URL = "https://synthrakx.github.io/alignr/ethics"
+GITHUB_URL = "https://github.com/synthrakx/alignr"
 
 
 def hash_email(email: str) -> str:
@@ -19,14 +20,90 @@ def hash_email(email: str) -> str:
 
 st.set_page_config(page_title="ALIGNR", page_icon="🧠", layout="wide")
 
-st.markdown("""
+
+# ── CONSENT GATE ─────────────────────────────────────────────
+
+def show_consent_gate() -> bool:
+    """Returns True only after explicit consent given.
+    Gate for all data collection. No user reaches data tabs without this."""
+    if st.session_state.get("consent_given"):
+        return True
+
+    st.title("🧠 ALIGNR")
+    st.markdown("### Before You Begin")
+    st.caption("ALIGNR is a research study. Please read and accept to participate.")
+
+    with st.expander("📋 What is ALIGNR? (click to read)", expanded=True):
+        st.markdown("""
+        ALIGNR is a **voluntary research study** measuring whether structured 
+        pre-AI reflection preserves cognitive independence over 60 days.
+        
+        **Study design:** You will be randomly assigned to one of two groups:
+        - **Feedback group (60%)**: sees your RAS, CII, SCS scores after each session
+        - **Control group (40%)**: same prompts, no scores shown
+        
+        Minimum recommended: 14 sessions over 60 days for meaningful data.
+        """)
+
+    with st.expander("🔒 What data is collected?"):
+        st.markdown(f"""
+        **We collect:** numerical scores only (RAS, CII, SCS), task category, 
+        timestamps, and a 16-character hash of your email (irreversible — 
+        we cannot recover your email from it).
+        
+        **We NEVER collect:** your pre-thinking text, AI output, prediction 
+        text, real email address, or IP address.
+        
+        [Verify this in our source code →]({GITHUB_URL})
+        """)
+
+    with st.expander("🚪 Your rights"):
+        st.markdown(f"""
+        - Participation is completely voluntary
+        - Withdraw any time: synthrakx@proton.me — data deleted within 48 hours
+        - Results published as aggregate statistics only — never individual
+        - Full ethics statement: [{ETHICS_URL}]({ETHICS_URL})
+        """)
+
+    with st.expander("⚠️ Limitations of our measures"):
+        st.markdown("""
+        - **RAS** measures linguistic similarity, not cognitive processes directly
+        - **CII** is a proxy measure, not a validated psychological instrument
+        - **SCS** measures prediction accuracy on semantic dimensions only
+        - Results are research data, not personal assessments
+        """)
+
+    st.markdown("---")
+    consent = st.checkbox(
+        "✅ I understand this is a research study and I consent to participate on these terms.",
+        key="consent_checkbox"
+    )
+
+    if consent:
+        if st.button("Continue to ALIGNR →", type="primary"):
+            st.session_state["consent_given"] = True
+            st.rerun()
+        return False
+
+    st.info("Please read and accept the terms above to continue.")
+    return False
+
+
+# ── MAIN APP (only runs after consent) ───────────────────────
+
+if not show_consent_gate():
+    st.stop()
+
+
+# Privacy banner (visible on all data tabs)
+st.markdown(f"""
 <div style="background:#0A1628;border:1px solid #1E3A5F;
 border-radius:8px;padding:10px 16px;margin-bottom:16px;
 color:#80C8FF;font-size:13px;">
-🔒 Your text never leaves your device processed without hashing.
+🔒 Your text never leaves your device unhashed.
 Only numerical scores are saved.
-<a href="https://github.com/synthrakxlabs/alignr"
-style="color:#4FA8FF">Verify in source →</a>
+<a href="{GITHUB_URL}" style="color:#4FA8FF">Verify in source →</a>
+| <a href="{ETHICS_URL}" style="color:#4FA8FF">Ethics statement →</a>
 </div>
 """, unsafe_allow_html=True)
 
@@ -147,7 +224,7 @@ with tab_sess:
 
 # ── ABOUT TAB ────────────────────────────────────────────────
 with tab_about:
-    st.markdown("""
+    st.markdown(f"""
 **ALIGNR** measures whether structured pre-AI reflection
 preserves cognitive independence over time.
 
@@ -164,9 +241,19 @@ preserves cognitive independence over time.
 - Assignment: deterministic hash of email
 - OSF preregistered before data collection
 
+### Limitations (Important)
+- **RAS** measures linguistic similarity, not cognitive processes directly
+- **CII** is a proxy measure, not a validated psychological instrument
+- **SCS** measures prediction accuracy on semantic dimensions only
+- Results are research data, not personal assessments
+
 ### Privacy
 - Zero text stored in database
 - Only numerical scores saved
 - Email hashed on input, never stored
-- [Verify in source code →](https://github.com/synthrakxlabs/alignr)
+
+### Resources
+- 📋 [Full Ethics Statement]({ETHICS_URL})
+- 🔓 [Source Code]({GITHUB_URL})
+- 📧 Contact: synthrakx@proton.me
     """)
