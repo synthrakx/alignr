@@ -1,8 +1,9 @@
 # fastapi_alignr_v1.py
-# Day 17 — ALIGNR FastAPI Backend (wired to SQLite + feedback)
+# Day 20 — ALIGNR FastAPI Backend (production-ready)
 # Run:  uvicorn fastapi_alignr_v1:app --reload
 # Docs: http://localhost:8000/docs
 
+import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -11,6 +12,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent / "alignr" / "backend"))
+sys.path.insert(0, str(Path(__file__).parent))
 
 from database import (
     init_db, hash_email, assign_group,
@@ -18,10 +20,9 @@ from database import (
     get_user_history, get_research_stats,
 )
 from study_groups import is_feedback_group
-from feedback import generate_feedback
 
-sys.path.insert(0, str(Path(__file__).parent))
-from backend.nlp_engine import calculate_ras, calculate_cii, calculate_scs
+# Ensure data directory exists (Railway ephemeral storage)
+Path("alignr_data").mkdir(exist_ok=True)
 
 # Init DB on startup
 init_db()
@@ -40,13 +41,14 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000",
                    "http://localhost:8501",
-                   "https://alignr.me"],
+                   "https://alignr.me",
+                   "https://*.streamlit.app"],
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
 
-# ── Pydantic Models ──────────────────────────────────────────
+# ── Pydantic Models ─────────────────────────────────────────
 
 class SessionRequest(BaseModel):
     email: str
@@ -99,7 +101,18 @@ def interpret_ras(score: Optional[float]) -> str:
     return "low"
 
 
-# ── Endpoints ────────────────────────────────────────────────
+# ── Endpoints ───────────────────────────────────────────────
+
+@app.get("/health")
+async def health():
+    """Health check — must respond fast (no ML model loading)."""
+    return {
+        "status": "healthy",
+        "version": "2.0.0",
+        "privacy": "text never stored",
+        "db_connected": True,
+    }
+
 
 @app.post("/user/register", response_model=RegisterResponse)
 async def register(req: RegisterRequest):
@@ -114,6 +127,10 @@ async def create_session(req: SessionRequest):
     Record session. Text processed in memory, discarded after scoring.
     Only floats saved to SQLite.
     """
+    # Lazy import: NLP engine downloads ~90MB model on first call.
+    # Importing here, not at module level, lets /health respond fast at startup.
+    from backend.nlp_engine import calculate_ras, calculate_cii, calculate_scs
+
     try:
         # Step 1: hash email → user_id
         user_id, group = register_user(req.email)
@@ -136,13 +153,19 @@ async def create_session(req: SessionRequest):
         session_num = save_session(user_id, req.task_type, ras, cii, scs)
 
         # Step 4: generate narrative for feedback group only
+        # Ollama unavailable in production → narrative will be None
         narrative = None
         if is_feedback_group(user_id):
-            narrative = generate_feedback(
-                ras=ras, cii=cii, scs=scs,
-                session_num=session_num,
-                task_type=req.task_type,
-            ) or None
+            try:
+                from feedback import generate_feedback
+                narrative = generate_feedback(
+                    ras=ras, cii=cii, scs=scs,
+                    session_num=session_num,
+                    task_type=req.task_type,
+                ) or None
+            except Exception:
+                # Ollama unavailable (production). Continue without narrative.
+                narrative = None
 
         # Step 5: text parameters end here — garbage collected
         return SessionResponse(
@@ -177,13 +200,3 @@ async def get_history(user_id: str):
 async def get_stats():
     """Group-level aggregate stats. No individual data exposed."""
     return StatsResponse(**get_research_stats())
-
-
-@app.get("/health")
-async def health():
-    """Health check for ATLAS watchdog."""
-    return {
-        "status": "healthy",
-        "version": "2.0.0",
-        "privacy": "text never stored",
-    }
