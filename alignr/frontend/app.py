@@ -1,7 +1,7 @@
 """
 alignr/frontend/app.py
 ALIGNR Streamlit Frontend v2 — with consent gate.
-Day 19 — June 19, 2026
+Day 20 — June 20, 2026 (identity layer added)
 Run: streamlit run alignr/frontend/app.py
 """
 import hashlib
@@ -12,6 +12,7 @@ import pandas as pd
 API_BASE = "http://localhost:8000"
 ETHICS_URL = "https://synthrakx.github.io/alignr/ethics"
 GITHUB_URL = "https://github.com/synthrakx/alignr"
+ORCID_URL = "https://orcid.org/0009-0009-1346-5230"
 
 
 def hash_email(email: str) -> str:
@@ -256,4 +257,17 @@ preserves cognitive independence over time.
 - 📋 [Full Ethics Statement]({ETHICS_URL})
 - 🔓 [Source Code]({GITHUB_URL})
 - 📧 Contact: synthrakx@proton.me
+    """)
+
+    st.markdown("---")
+    st.markdown(f"""
+### Researcher
+
+This study is conducted by **Aman Raj**, independent researcher, Bihar, India.
+
+- **Email:** synthrakx@proton.me
+- **GitHub:** [github.com/synthrakx/alignr]({GITHUB_URL})
+- **ORCID:** [0009-0009-1346-5230]({ORCID_URL})
+
+*ALIGNR is not affiliated with any institution.*
     """)

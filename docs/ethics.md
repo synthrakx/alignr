@@ -117,8 +117,10 @@ These limitations are stated explicitly because honest science requires them:
 
 ## Contact
 
+**Principal Investigator:** Aman Raj  
 **Email:** synthrakx@proton.me  
 **GitHub:** [github.com/synthrakx/alignr](https://github.com/synthrakx/alignr)  
-**Website:** [alignr.me](https://alignr.me)
+**Website:** [alignr.me](https://alignr.me)  
+**ORCID:** [orcid.org/0009-0009-1346-5230](https://orcid.org/0009-0009-1346-5230)
 
-*ALIGNR is independent research. Not affiliated with any institution.*
+*ALIGNR is independent research conducted by Aman Raj. Not affiliated with any institution.*
