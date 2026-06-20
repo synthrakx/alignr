@@ -1,10 +1,15 @@
 # ALIGNR
 
 **Author:** Aman Raj ([@synthrakx](https://twitter.com/synthrakx))
+
 **Website:** [alignr.me](https://alignr.me) *(live June 21, 2026)*
+
 **Live API:** [alignr-production-4aae.up.railway.app](https://alignr-production-4aae.up.railway.app)
+
 **Ethics:** [synthrakx.github.io/alignr/ethics](https://synthrakx.github.io/alignr/ethics)
+
 **ORCID:** [0009-0009-1346-5230](https://orcid.org/0009-0009-1346-5230)
+
 **Preregistration:** OSF — submitted June 21, 2026 before any data collection
 
 ---
