@@ -1,141 +1,84 @@
 # ALIGNR
-## AI Cognitive Alignment Trainer
 
-**Status:** Day 12 of 90 — building in public. Launching June 28, 2026.
-
-> How well does your thinking align with AI? Track it over 60 days.
-
-ALIGNR measures cognitive alignment between your pre-AI reasoning and
-AI-generated outputs using semantic similarity. Part of a real research
-study on human-AI cognitive development.
+**Author:** Aman Raj ([@synthrakx](https://twitter.com/synthrakx))
+**Website:** [alignr.me](https://alignr.me) *(live June 21, 2026)*
+**Live API:** [alignr-production-4aae.up.railway.app](https://alignr-production-4aae.up.railway.app)
+**Ethics:** [synthrakx.github.io/alignr/ethics](https://synthrakx.github.io/alignr/ethics)
+**ORCID:** [0009-0009-1346-5230](https://orcid.org/0009-0009-1346-5230)
+**Preregistration:** OSF — submitted June 21, 2026 before any data collection
 
 ---
 
-## Research Output (Simulated — Day 11)
+## Research Question
 
-The portfolio simulation runs the complete ALIGNR system end-to-end
-with 200 simulated users × 10 sessions = 2,000 sessions.
+Does structured pre-AI articulation preserve cognitive independence and reduce AI dependence over 60 days, compared to unstructured AI use?
 
-**Summary:**
+## Three Metrics
 
-- Study: Randomized A/B (feedback vs control)
-- Users: 200 total (120 feedback, 80 control)
-- Sessions: 2,000 total (10 per user)
-- Metrics: RAS, CII, SCS
-- Privacy: No text stored. Only floats. Verified by grep.
+| Metric | Formula | Measures |
+|--------|---------|----------|
+| RAS | cosine_similarity(encode(pre_thinking), encode(ai_output)) | Calibration of pre-AI reasoning |
+| CII | (ttk * 0.6) + (min(avg_len/20, 1.0) * 0.4) | Vocabulary independence over time |
+| SCS | cosine_similarity(encode(prediction), encode(ai_output)) | Surprise calibration accuracy |
 
-**RAS results:**
+Encoder: sentence-transformers/all-MiniLM-L6-v2 (384-dim embeddings)
 
-- Feedback group avg: 0.6865
-- Control group avg: 0.3660
-- p-value: 0.0000
-- Cohen's d: 13.03 (large effect)
-- Significant: True
+## Study Design
 
-**Data type:** SIMULATED — replace with real cohort data on Day 63.
-**Preprint:** OSF preregistered Day 21, before any real data collection.
+- Randomized A/B: 60% feedback group (sees scores + AI narrative), 40% control (no scores)
+- Assignment: Deterministic SHA-256 hash of email — same email goes to same group, always
+- Duration: 60 days per participant, minimum 14 sessions for primary analysis
+- Target N: 500+ registered participants
+- Primary test: Independent t-test + Cohen's d, alpha = 0.05
+- Preregistered: OSF before any data collection
 
-**Note on effect size:** The d=13 is inflated because the simulation
-uses word-overlap as a proxy. Real semantic similarity
-(sentence-transformers all-MiniLM-L6-v2) activates on Day 15, which
-will produce realistic effect sizes in the d=0.5-1.5 range typical of
-cognition research.
+## Privacy Architecture
 
-### Figures
+No text is stored at any point. Only numerical scores.
 
-- **Figure 1:** RAS Trajectory — feedback vs control over 10 sessions
-- **Figure 2:** CII Progression — vocabulary diversity over time
-- **Figure 3:** SCS Calibration — prediction accuracy distribution
+| Stored | Never stored |
+|--------|--------------|
+| RAS, CII, SCS (floats) | pre_thinking text |
+| task_type, timestamp | ai_output text |
+| 16-char SHA-256 hash of email | prediction text |
+| study_group assignment | email, IP, any PII |
 
-Run the simulation locally with: python alignr_simulation.py
+Full ethics statement: [synthrakx.github.io/alignr/ethics](https://synthrakx.github.io/alignr/ethics)
 
----
+## Quick Start
 
-## API — FastAPI Backend (Day 12)
+git clone https://github.com/synthrakx/alignr
+cd alignr
+pip install -r requirements.txt
+uvicorn fastapi_alignr_v1:app --reload
+streamlit run alignr/frontend/app.py
 
-The ALIGNR backend exposes the research system as a documented REST API.
-Privacy is enforced at the API boundary: text enters the request body,
-is processed, and is discarded. It does not appear in any response.
+## API Endpoints
 
-**4 endpoints:**
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /user/register | Register user (email hashed, never stored) |
+| POST | /session | Submit session, receive RAS/CII/SCS scores |
+| GET | /history/{user_id} | Retrieve numerical session history |
+| GET | /research/stats | Aggregate statistics for both groups |
+| GET | /health | Database and service health check |
 
-- POST /session — record a session, returns RAS/CII/SCS scores
-- GET  /user/{email_hash} — retrieve user history (no text returned)
-- GET  /research/stats — aggregate study statistics
-- GET  /health — server status with privacy claim
+Live API: https://alignr-production-4aae.up.railway.app/docs
 
-**Run the backend locally:** uvicorn fastapi_alignr_v1:app --reload
+## How to Cite
 
-**Open the Swagger UI:** http://localhost:8000/docs
+Raj, A. (2026). Does structured pre-AI articulation preserve cognitive independence? A 60-day randomized study. OSF Preregistrations. https://osf.io/[ID]
 
-**Run automated tests:** python test_api.py
+## Researcher
 
-The test script verifies all 4 endpoints AND asserts that no input text
-appears in any response body. Privacy is proven empirically, not just
-documented.
+This study is conducted by Aman Raj, independent researcher, Bihar, India.
 
----
+- Email: synthrakx@proton.me
+- GitHub: github.com/synthrakx
+- ORCID: 0009-0009-1346-5230
 
-## Quality & Testing
+ALIGNR is not affiliated with any institution.
 
-- All Python files formatted with black (industry standard)
-- Type hints across all function signatures
-- Privacy assertions in: oop_alignr.py, test_api.py, alignr_simulation.py
-- 4/4 API endpoints verified with automated tests
-- 2,000 simulated sessions processed without text persistence
+## License
 
----
-
-## Research Basis
-
-- CHI 2026: Pre-AI reflection improves critical thinking outcomes
-- Microsoft Research ExtendAI (CHI 2025): Articulating reasoning first = better augmentation
-- Academy of Management Journal (2026): Cognitive alignment in human-AI collaboration
-
----
-
-## Privacy — Verifiable, Not Just Claimed
-
-Your text is never stored. Only alignment scores (numbers) are kept.
-
-**Architectural enforcement:**
-
-- Text parameters are method-local inside ALIGNRSession.calculate()
-- After calculation, text falls out of scope and is garbage collected
-- Nothing assigned to self from text inputs
-- Verifiable in source: searching for self.pre in oop_alignr.py returns no code assigning text to self
-
-**Data export proof:**
-
-- portfolio.json contains only counts, averages, p-values, effect sizes
-- Zero raw user sentences in the export
-- 2,000+ text inputs processed in tests, zero persisted
-
-**API-level proof:**
-
-- POST /session response body verified to contain no input strings
-- Test in test_api.py runs the assertion automatically
-- Anyone can clone the repo, run the test, and verify the claim
-
-Analysis runs on local AI (Ollama) — nothing sent to OpenAI.
-
----
-
-## Architecture
-
-- **ALIGNRSession** — one interaction, metrics extracted, text discarded
-- **ALIGNRUser** — one participant, identified by SHA-256 email hash
-- **ALIGNRResearch** — the entire study, group comparison, export
-- **FastAPI layer** — exposes the system via 4 documented endpoints
-
-The class hierarchy lives in oop_alignr.py. The portfolio simulation
-that uses it end-to-end lives in alignr_simulation.py. The API
-wrapping it lives in fastapi_alignr_v1.py.
-
----
-
-## Built By
-
-SYNTHRAKX | synthrakx@proton.me | May 2026
-
-GitHub: github.com/synthrakx/alignr
+MIT — open source. Verify every claim in the source.
