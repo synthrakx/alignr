@@ -2,7 +2,7 @@
 
 **Author:** Aman Raj ([@synthrakx](https://twitter.com/synthrakx))
 
-**Website:** [alignr.me](https://alignr.me) *(live June 21, 2026)*
+**Website:** [alignr.me](https://alignr.me) *(live June 23, 2026)*
 
 **Live API:** [alignr-production-4aae.up.railway.app](https://alignr-production-4aae.up.railway.app)
 
@@ -10,7 +10,7 @@
 
 **ORCID:** [0009-0009-1346-5230](https://orcid.org/0009-0009-1346-5230)
 
-**Preregistration:** OSF — submitted June 21, 2026 before any data collection
+**Preregistration:** [osf.io/y86mg](https://osf.io/y86mg) — registered June 23, 2026, before any data collection
 
 ---
 
@@ -35,7 +35,7 @@ Encoder: sentence-transformers/all-MiniLM-L6-v2 (384-dim embeddings)
 - Duration: 60 days per participant, minimum 14 sessions for primary analysis
 - Target N: 500+ registered participants
 - Primary test: Independent t-test + Cohen's d, alpha = 0.05
-- Preregistered: OSF before any data collection
+- Preregistered: [osf.io/y86mg](https://osf.io/y86mg) before any data collection
 
 ## Privacy Architecture
 
@@ -72,7 +72,19 @@ Live API: https://alignr-production-4aae.up.railway.app/docs
 
 ## How to Cite
 
-Raj, A. (2026). Does structured pre-AI articulation preserve cognitive independence? A 60-day randomized study. OSF Preregistrations. https://osf.io/[ID]
+BibTeX:
+
+    @misc{raj2026alignr,
+      title  = {Does structured pre-AI articulation preserve cognitive independence?
+                A 60-day randomized study},
+      author = {Raj, Aman},
+      year   = {2026},
+      month  = {June},
+      url    = {https://osf.io/y86mg},
+      note   = {Preregistered at osf.io/y86mg. Platform: alignr.me}
+    }
+
+APA: Raj, A. (2026, June 23). *ALIGNR: Longitudinal Study of Cognitive Alignment in Human-AI Interaction*. OSF. https://osf.io/y86mg
 
 ## Researcher
 
@@ -80,7 +92,7 @@ This study is conducted by Aman Raj, independent researcher, Bihar, India.
 
 - Email: synthrakx@proton.me
 - GitHub: github.com/synthrakx
-- ORCID: 0009-0009-1346-5230
+- ORCID: [0009-0009-1346-5230](https://orcid.org/0009-0009-1346-5230)
 
 ALIGNR is not affiliated with any institution.
 

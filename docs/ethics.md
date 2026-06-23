@@ -5,7 +5,7 @@ title: Ethics Statement
 
 # ALIGNR — Research Ethics Statement
 
-**Last updated:** June 19, 2026
+**Last updated:** June 23, 2026
 
 ---
 
@@ -13,7 +13,7 @@ title: Ethics Statement
 
 ALIGNR is a research platform studying whether structured pre-AI reflection preserves cognitive independence over 60 days. By using ALIGNR, you are voluntarily participating in a randomized research study.
 
-**Study preregistration:** [osf.io/XXXXXXX](https://osf.io) (will be registered on June 21, 2026, BEFORE any data collection or platform launch)
+**Study preregistration:** [osf.io/y86mg](https://osf.io/y86mg) (registered June 23, 2026, before any data collection or platform launch)
 
 ---
 
