@@ -1,18 +1,19 @@
 """
 alignr/frontend/app.py
-ALIGNR Streamlit Frontend v2 — with consent gate.
-Day 20 — June 20, 2026 (identity layer added)
-Run: streamlit run alignr/frontend/app.py
+ALIGNR Streamlit Frontend v3 — production deploy.
+Day 22 — June 23, 2026 (Railway backend, OSF preregistration live)
+Run locally: streamlit run alignr/frontend/app.py
 """
 import hashlib
 import streamlit as st
 import requests
 import pandas as pd
 
-API_BASE = "http://localhost:8000"
+API_BASE = "https://alignr-production-4aae.up.railway.app"
 ETHICS_URL = "https://synthrakx.github.io/alignr/ethics"
 GITHUB_URL = "https://github.com/synthrakx/alignr"
 ORCID_URL = "https://orcid.org/0009-0009-1346-5230"
+OSF_URL = "https://osf.io/y86mg"
 
 
 def hash_email(email: str) -> str:
@@ -35,9 +36,11 @@ def show_consent_gate() -> bool:
     st.caption("ALIGNR is a research study. Please read and accept to participate.")
 
     with st.expander("📋 What is ALIGNR? (click to read)", expanded=True):
-        st.markdown("""
+        st.markdown(f"""
         ALIGNR is a **voluntary research study** measuring whether structured 
         pre-AI reflection preserves cognitive independence over 60 days.
+        
+        **Preregistered on OSF:** [{OSF_URL}]({OSF_URL}) — June 23, 2026, before any data collection.
         
         **Study design:** You will be randomly assigned to one of two groups:
         - **Feedback group (60%)**: sees your RAS, CII, SCS scores after each session
@@ -105,6 +108,7 @@ color:#80C8FF;font-size:13px;">
 Only numerical scores are saved.
 <a href="{GITHUB_URL}" style="color:#4FA8FF">Verify in source →</a>
 | <a href="{ETHICS_URL}" style="color:#4FA8FF">Ethics statement →</a>
+| <a href="{OSF_URL}" style="color:#4FA8FF">OSF preregistration →</a>
 </div>
 """, unsafe_allow_html=True)
 
@@ -182,7 +186,7 @@ with tab_sess:
         elif not ai_out or len(ai_out.strip()) < 10:
             st.warning("AI output is required (min 10 characters).")
         else:
-            with st.spinner("Calculating alignment scores..."):
+            with st.spinner("Calculating alignment scores (first request may take 60-90s while model loads)..."):
                 try:
                     r = requests.post(f"{API_BASE}/session", json={
                         "email": s_email,
@@ -190,7 +194,7 @@ with tab_sess:
                         "ai_output": ai_out,
                         "prediction": pred or "",
                         "task_type": s_task,
-                    }, timeout=60)
+                    }, timeout=120)
 
                     if r.ok:
                         res = r.json()
@@ -219,15 +223,17 @@ with tab_sess:
                     else:
                         st.error(f"API error {r.status_code}: {r.text}")
                 except requests.exceptions.Timeout:
-                    st.error("Request timed out. Is the backend running?")
+                    st.error("Request timed out. Backend may be cold-starting — try again in 30 seconds.")
                 except requests.exceptions.ConnectionError:
-                    st.error("Cannot connect to API. Run: uvicorn fastapi_alignr_v1:app --reload")
+                    st.error("Cannot connect to API. Service may be temporarily down.")
 
 # ── ABOUT TAB ────────────────────────────────────────────────
 with tab_about:
     st.markdown(f"""
 **ALIGNR** measures whether structured pre-AI reflection
 preserves cognitive independence over time.
+
+**Preregistered:** [{OSF_URL}]({OSF_URL}) — registered June 23, 2026, before any data collection.
 
 ### Metrics
 | Metric | Formula | Meaning |
@@ -239,8 +245,8 @@ preserves cognitive independence over time.
 ### Study Design
 - 60-day randomized controlled trial
 - 60% feedback group / 40% control group
-- Assignment: deterministic hash of email
-- OSF preregistered before data collection
+- Assignment: deterministic SHA-256 hash of email
+- OSF preregistered before any data collection
 
 ### Limitations (Important)
 - **RAS** measures linguistic similarity, not cognitive processes directly
@@ -255,6 +261,7 @@ preserves cognitive independence over time.
 
 ### Resources
 - 📋 [Full Ethics Statement]({ETHICS_URL})
+- 📄 [OSF Preregistration]({OSF_URL})
 - 🔓 [Source Code]({GITHUB_URL})
 - 📧 Contact: synthrakx@proton.me
     """)
