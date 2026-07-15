@@ -20,6 +20,8 @@ setup_verification_final.py
 test_neon.py
 alignr_sessions.json
 .aider*
+alignr_data/
+
 # Audio test artifacts (not part of project)
 mic_test.wav
 temp.wav

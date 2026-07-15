@@ -1,5 +1,5 @@
 # fastapi_alignr_v1.py
-# Day 20 — ALIGNR FastAPI Backend (production-ready)
+# Day 45 — ALIGNR FastAPI Backend (Postgres/Neon, production-ready)
 # Run:  uvicorn fastapi_alignr_v1:app --reload
 # Docs: http://localhost:8000/docs
 
@@ -8,23 +8,15 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
-import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent / "alignr" / "backend"))
-sys.path.insert(0, str(Path(__file__).parent))
-
-from database import (
+from alignr.backend.database import (
     init_db, hash_email, assign_group,
     register_user, save_session,
     get_user_history, get_research_stats,
 )
-from study_groups import is_feedback_group
+from alignr.backend.study_groups import is_feedback_group
 
-# Ensure data directory exists (Railway ephemeral storage)
-Path("alignr_data").mkdir(exist_ok=True)
-
-# Init DB on startup
+# Init DB on startup (Postgres via DATABASE_URL env var)
 init_db()
 
 app = FastAPI(
@@ -34,7 +26,7 @@ app = FastAPI(
         "Privacy: text processed locally and discarded. "
         "Only numerical scores returned and stored."
     ),
-    version="2.0.0",
+    version="2.1.0",
 )
 
 app.add_middleware(
@@ -108,7 +100,7 @@ async def health():
     """Health check — must respond fast (no ML model loading)."""
     return {
         "status": "healthy",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "privacy": "text never stored",
         "db_connected": True,
     }
@@ -125,11 +117,11 @@ async def register(req: RegisterRequest):
 async def create_session(req: SessionRequest):
     """
     Record session. Text processed in memory, discarded after scoring.
-    Only floats saved to SQLite.
+    Only floats saved to Postgres.
     """
     # Lazy import: NLP engine downloads ~90MB model on first call.
     # Importing here, not at module level, lets /health respond fast at startup.
-    from backend.nlp_engine import calculate_ras, calculate_cii, calculate_scs
+    from alignr.backend.nlp_engine import calculate_ras, calculate_cii, calculate_scs
 
     try:
         # Step 1: hash email → user_id
@@ -149,7 +141,7 @@ async def create_session(req: SessionRequest):
         )
         scs = scs_result.get("scs")
 
-        # Step 3: save scores to SQLite (no text)
+        # Step 3: save scores to Postgres (no text)
         session_num = save_session(user_id, req.task_type, ras, cii, scs)
 
         # Step 4: generate narrative for feedback group only
@@ -157,7 +149,7 @@ async def create_session(req: SessionRequest):
         narrative = None
         if is_feedback_group(user_id):
             try:
-                from feedback import generate_feedback
+                from alignr.backend.feedback import generate_feedback
                 narrative = generate_feedback(
                     ras=ras, cii=cii, scs=scs,
                     session_num=session_num,

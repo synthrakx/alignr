@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from database import assign_group
+from alignr.backend.database import assign_group
 
 
 def is_feedback_group(user_id: str) -> bool:
