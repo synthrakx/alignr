@@ -20,12 +20,14 @@ import numpy as np
 from sentence_transformers import SentenceTransformer, util
 
 # Singleton model loader for sentence-transformers all-MiniLM-L6-v2 (loaded once globally)
+# ONNX backend used for memory efficiency on Render free tier (512 MB RAM ceiling).
+# Same model, same weights, same output — different execution engine.
 model = None
 
 def load_model():
     global model
     if model is None:
-        model = SentenceTransformer('all-MiniLM-L6-v2')
+        model = SentenceTransformer('all-MiniLM-L6-v2', backend="onnx")
 
 load_model()
 
