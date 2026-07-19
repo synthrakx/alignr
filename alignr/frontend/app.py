@@ -1,7 +1,8 @@
 """
 alignr/frontend/app.py
 ALIGNR Streamlit Frontend v3 — production deploy.
-Day 22 — June 23, 2026 (Railway backend, OSF preregistration live)
+Day 22 — June 23, 2026 (OSF preregistration live)
+Day 49 — July 19, 2026 (Migrated backend: Railway → Render, Path B onnxruntime deployed)
 Run locally: streamlit run alignr/frontend/app.py
 """
 import hashlib
@@ -9,7 +10,7 @@ import streamlit as st
 import requests
 import pandas as pd
 
-API_BASE = "https://alignr-production-4aae.up.railway.app"
+API_BASE = "https://alignr-giaz.onrender.com"
 ETHICS_URL = "https://synthrakx.github.io/alignr/ethics"
 GITHUB_URL = "https://github.com/synthrakx/alignr"
 ORCID_URL = "https://orcid.org/0009-0009-1346-5230"

@@ -32,3 +32,7 @@ voice_demo.mp4.mp4
 *.day48-backup
 test_path_b_ram.py
 test_st_ram.py
+*.day49-backup
+
+# Day-audit screenshots (kept locally, not in repo)
+Day*.png
