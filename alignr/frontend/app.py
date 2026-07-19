@@ -135,27 +135,42 @@ with tab_dash:
         elif r.ok:
             sessions = r.json().get("sessions", [])
             df = pd.DataFrame(sessions)
+            
+            # Determine study group from the history (assignment is permanent)
+            group = df['study_group'].iloc[0] if not df.empty else "unknown"
 
-            col1, col2, col3 = st.columns(3)
-            col1.metric("Latest RAS",
-                        f"{df['ras'].iloc[-1]:.3f}",
-                        delta=f"{df['ras'].iloc[-1] - df['ras'].iloc[-2]:.3f}"
-                        if len(df) > 1 else None)
-            col2.metric("Latest CII", f"{df['cii'].iloc[-1]:.3f}")
-            col3.metric("Latest SCS",
-                        f"{df['scs'].dropna().iloc[-1]:.3f}"
-                        if df["scs"].notna().any() else "N/A")
+            if group == "feedback":
+                # Feedback group: Show full metrics and history with scores
+                col1, col2, col3 = st.columns(3)
+                col1.metric("Latest RAS",
+                            f"{df['ras'].iloc[-1]:.3f}",
+                            delta=f"{df['ras'].iloc[-1] - df['ras'].iloc[-2]:.3f}"
+                            if len(df) > 1 else None)
+                col2.metric("Latest CII", f"{df['cii'].iloc[-1]:.3f}")
+                col3.metric("Latest SCS",
+                            f"{df['scs'].dropna().iloc[-1]:.3f}"
+                            if df["scs"].notna().any() else "N/A")
 
-            st.subheader("Session History")
-            st.dataframe(
-                df[["session_num", "task_type", "ras",
-                    "cii", "scs", "study_group", "created_at"]],
-                use_container_width=True
-            )
+                st.subheader("Session History")
+                st.dataframe(
+                    df[["session_num", "task_type", "ras",
+                        "cii", "scs", "created_at"]],
+                    use_container_width=True
+                )
 
-            if len(df) >= 2:
-                st.subheader("RAS & CII Trend")
-                st.line_chart(df.set_index("session_num")[["ras", "cii"]])
+                if len(df) >= 2:
+                    st.subheader("RAS & CII Trend")
+                    st.line_chart(df.set_index("session_num")[["ras", "cii"]])
+            else:
+                # Control group: Hide scores, show only session progress
+                st.info("As a control participant, your progress is recorded for research. Scores are hidden per study design.")
+                
+                st.subheader("Session History")
+                # Show only non-score columns
+                st.dataframe(
+                    df[["session_num", "task_type", "created_at"]],
+                    use_container_width=True
+                )
         else:
             st.error(f"API error: {r.status_code}")
 
@@ -204,6 +219,7 @@ with tab_sess:
                         study_group = res.get("study_group", "unknown")
 
                         if study_group == "feedback":
+                            # Feedback group: show scores + interpretation + narrative
                             c1, c2, c3 = st.columns(3)
                             c1.metric("RAS", f"{res.get('ras', 0):.3f}",
                                       help="Reasoning Alignment Score")
@@ -223,6 +239,7 @@ with tab_sess:
                             if res.get("narrative"):
                                 st.info(f"💡 {res['narrative']}")
                         else:
+                            # Control group: confirmation only, no scores per OSF preregistration
                             st.caption(
                                 f"Group: control | "
                                 f"Session #{res.get('session_number')}"
