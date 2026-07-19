@@ -28,3 +28,7 @@ temp.wav
 
 # Misnamed voice demo (real one is voice_demo.mp4)
 voice_demo.mp4.mp4
+# Day 48 Path B artifacts
+*.day48-backup
+test_path_b_ram.py
+test_st_ram.py
