@@ -200,25 +200,38 @@ with tab_sess:
                     if r.ok:
                         res = r.json()
                         st.success("✅ Scores calculated and saved.")
+                        
+                        study_group = res.get("study_group", "unknown")
 
-                        c1, c2, c3 = st.columns(3)
-                        c1.metric("RAS", f"{res.get('ras', 0):.3f}",
-                                  help="Reasoning Alignment Score")
-                        c2.metric("CII", f"{res.get('cii', 0):.3f}",
-                                  help="Cognitive Independence Index")
-                        c3.metric("SCS",
-                                  f"{res.get('scs'):.3f}"
-                                  if res.get("scs") else "N/A",
-                                  help="Surprise Calibration Score")
+                        if study_group == "feedback":
+                            c1, c2, c3 = st.columns(3)
+                            c1.metric("RAS", f"{res.get('ras', 0):.3f}",
+                                      help="Reasoning Alignment Score")
+                            c2.metric("CII", f"{res.get('cii', 0):.3f}",
+                                      help="Cognitive Independence Index")
+                            c3.metric("SCS",
+                                      f"{res.get('scs'):.3f}"
+                                      if res.get("scs") else "N/A",
+                                      help="Surprise Calibration Score")
 
-                        st.caption(
-                            f"Interpretation: {res.get('ras_interpretation')} | "
-                            f"Group: {res.get('study_group')} | "
-                            f"Session #{res.get('session_number')}"
-                        )
+                            st.caption(
+                                f"Interpretation: {res.get('ras_interpretation')} | "
+                                f"Group: feedback | "
+                                f"Session #{res.get('session_number')}"
+                            )
 
-                        if res.get("narrative"):
-                            st.info(f"💡 {res['narrative']}")
+                            if res.get("narrative"):
+                                st.info(f"💡 {res['narrative']}")
+                        else:
+                            st.caption(
+                                f"Group: control | "
+                                f"Session #{res.get('session_number')}"
+                            )
+                            st.caption(
+                                "Per the study design, control participants complete "
+                                "identical sessions without seeing scores. Your session "
+                                "was recorded successfully."
+                            )
 
                         st.caption(res.get("message", ""))
                     else:
