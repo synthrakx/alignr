@@ -287,7 +287,7 @@ preserves cognitive independence over time.
 
 ### Privacy
 - Zero text stored in database
-- Only numerical scores saved
+- Only numerical scores stored
 - Email hashed on input, never stored
 
 ### Resources
