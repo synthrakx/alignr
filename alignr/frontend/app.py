@@ -105,8 +105,8 @@ st.markdown(f"""
 <div style="background:#0A1628;border:1px solid #1E3A5F;
 border-radius:8px;padding:10px 16px;margin-bottom:16px;
 color:#80C8FF;font-size:13px;">
-🔒 Your text never leaves your device unhashed.
-Only numerical scores are saved.
+🔒 Your text is processed in memory and immediately discarded.
+Only numerical scores are stored.
 <a href="{GITHUB_URL}" style="color:#4FA8FF">Verify in source →</a>
 | <a href="{ETHICS_URL}" style="color:#4FA8FF">Ethics statement →</a>
 | <a href="{OSF_URL}" style="color:#4FA8FF">OSF preregistration →</a>
