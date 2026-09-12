@@ -2,15 +2,17 @@
 
 **Author:** Aman Raj ([@synthrakx](https://twitter.com/synthrakx))
 
-**Website:** [alignr.me](https://alignr.me) *(live June 23, 2026)*
+**Platform:** [alignr.streamlit.app](https://alignr.streamlit.app)
 
-**Live API:** [alignr-production-4aae.up.railway.app](https://alignr-production-4aae.up.railway.app)
+**Live API:** [alignr-giaz.onrender.com](https://alignr-giaz.onrender.com)
 
 **Ethics:** [synthrakx.github.io/alignr/ethics](https://synthrakx.github.io/alignr/ethics)
 
 **ORCID:** [0009-0009-1346-5230](https://orcid.org/0009-0009-1346-5230)
 
 **Preregistration:** [osf.io/y86mg](https://osf.io/y86mg) — registered June 23, 2026, before any data collection
+
+**Protocol Log:** [osf.io/mv4u7](https://osf.io/mv4u7) — Protocol Clarification & Correction Log
 
 ---
 
@@ -26,16 +28,16 @@ Does structured pre-AI articulation preserve cognitive independence and reduce A
 | CII | (ttk * 0.6) + (min(avg_len/20, 1.0) * 0.4) | Vocabulary independence over time |
 | SCS | cosine_similarity(encode(prediction), encode(ai_output)) | Surprise calibration accuracy |
 
-Encoder: sentence-transformers/all-MiniLM-L6-v2 (384-dim embeddings)
+Encoder: sentence-transformers/all-MiniLM-L6-v2 (384-dim embeddings) / Path B Direct ONNX Runtime
 
 ## Study Design
 
-- Randomized A/B: 60% feedback group (sees scores + AI narrative), 40% control (no scores)
+- Randomized A/B: ~60% feedback group (sees numerical scores), ~40% control (no scores)
 - Assignment: Deterministic SHA-256 hash of email — same email goes to same group, always
-- Duration: 60 days per participant, minimum 14 sessions for primary analysis
-- Target N: 500+ registered participants
-- Primary test: Independent t-test + Cohen's d, alpha = 0.05
-- Preregistered: [osf.io/y86mg](https://osf.io/y86mg) before any data collection
+- Duration: 60 days per participant, 14 sessions max (hard cap enforced server-side)
+- Primary test: Independent t-test comparing Session 14 RAS between groups + Cohen's d, alpha = 0.05
+- Supplementary: Bootstrap resampling (1,000 iterations, 95% CI)
+- Preregistered: [osf.io/y86mg](https://osf.io/y86mg) | Protocol Log: [osf.io/mv4u7](https://osf.io/mv4u7)
 
 ## Privacy Architecture
 
@@ -68,7 +70,7 @@ streamlit run alignr/frontend/app.py
 | GET | /research/stats | Aggregate statistics for both groups |
 | GET | /health | Database and service health check |
 
-Live API: https://alignr-production-4aae.up.railway.app/docs
+Live API Docs: https://alignr-giaz.onrender.com/docs
 
 ## How to Cite
 
@@ -81,7 +83,7 @@ BibTeX:
       year   = {2026},
       month  = {June},
       url    = {https://osf.io/y86mg},
-      note   = {Preregistered at osf.io/y86mg. Platform: alignr.me}
+      note   = {Preregistered at osf.io/y86mg. Platform: alignr.streamlit.app}
     }
 
 APA: Raj, A. (2026, June 23). *ALIGNR: Longitudinal Study of Cognitive Alignment in Human-AI Interaction*. OSF. https://osf.io/y86mg
@@ -99,3 +101,5 @@ ALIGNR is not affiliated with any institution.
 ## License
 
 MIT — open source. Verify every claim in the source.
+
+---

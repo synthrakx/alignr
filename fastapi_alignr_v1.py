@@ -16,6 +16,8 @@ from alignr.backend.database import (
 )
 from alignr.backend.study_groups import is_feedback_group
 
+MAX_SESSIONS = 14
+
 # Init DB on startup (Postgres via DATABASE_URL env var)
 init_db()
 
@@ -119,13 +121,20 @@ async def create_session(req: SessionRequest):
     Record session. Text processed in memory, discarded after scoring.
     Only floats saved to Postgres.
     """
-    # Lazy import: NLP engine downloads ~90MB model on first call.
-    # Importing here, not at module level, lets /health respond fast at startup.
-    from alignr.backend.nlp_engine import calculate_ras, calculate_cii, calculate_scs
-
     try:
         # Step 1: hash email → user_id
         user_id, group = register_user(req.email)
+
+        # Step 1b: Enforce 14-session study cap before running scoring or DB writes
+        history = get_user_history(user_id)
+        if len(history) >= MAX_SESSIONS:
+            raise HTTPException(
+                status_code=403,
+                detail="This participant has reached the 14-session study limit."
+            )
+
+        # Lazy import: NLP engine downloads ~90MB model on first call.
+        from alignr.backend.nlp_engine import calculate_ras, calculate_cii, calculate_scs
 
         # Step 2: calculate scores (text is method-local here)
         try:
@@ -172,6 +181,8 @@ async def create_session(req: SessionRequest):
             narrative=narrative,
             message="Session recorded. Text discarded. Only scores retained.",
         )
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

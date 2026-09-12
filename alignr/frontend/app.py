@@ -42,12 +42,13 @@ def show_consent_gate() -> bool:
         pre-AI reflection preserves cognitive independence over 60 days.
         
         **Preregistered on OSF:** [{OSF_URL}]({OSF_URL}) — June 23, 2026, before any data collection.
+        A public log of protocol clarifications made before launch is available on OSF.
         
-        **Study design:** You will be randomly assigned to one of two groups:
-        - **Feedback group (60%)**: sees your RAS, CII, SCS scores after each session
-        - **Control group (40%)**: same prompts, no scores shown
+        **Study design:** You will be randomly assigned to one of two groups, in approximately a 60/40 split:
+        - **Feedback group (~60%)**: sees your RAS, CII, and SCS numerical scores after each session
+        - **Control group (~40%)**: same prompts, no scores shown
         
-        Minimum recommended: 14 sessions over 60 days for meaningful data.
+        Sessions are capped at 14. Minimum recommended for meaningful data: completing all 14 over 60 days.
         """)
 
     with st.expander("🔒 What data is collected?"):
@@ -65,7 +66,7 @@ def show_consent_gate() -> bool:
     with st.expander("🚪 Your rights"):
         st.markdown(f"""
         - Participation is completely voluntary
-        - Withdraw any time: synthrakx@proton.me — data deleted within 48 hours
+        - Withdraw any time: synthrakx@proton.me — data deleted within 5 business days
         - Results published as aggregate statistics only — never individual
         - Full ethics statement: [{ETHICS_URL}]({ETHICS_URL})
         """)
@@ -275,9 +276,10 @@ preserves cognitive independence over time.
 
 ### Study Design
 - 60-day randomized controlled trial
-- 60% feedback group / 40% control group
+- ~60% feedback group / ~40% control group
 - Assignment: deterministic SHA-256 hash of email
 - OSF preregistered before any data collection
+- Hard cap at 14 sessions per participant
 
 ### Limitations (Important)
 - **RAS** measures linguistic similarity, not cognitive processes directly

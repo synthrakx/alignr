@@ -1,0 +1,144 @@
+{
+  "prospects": {
+    "magadhorodentalpatna@gmail.com": {
+      "name": "Magadh Oro Dental Clinic",
+      "city": "Patna",
+      "vertical": "clinic",
+      "rating": "4.8",
+      "reviews": "344",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "info@faciodental.com": {
+      "name": "Facio Dental Super Speciality Clinic",
+      "city": "Patna",
+      "vertical": "clinic",
+      "rating": "4.5",
+      "reviews": "417",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "rajdentalgaya@gmail.com": {
+      "name": "Raj Dental Clinic",
+      "city": "Gaya",
+      "vertical": "clinic",
+      "rating": "4.8",
+      "reviews": "1,265",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "info@shahidentalclinic.com": {
+      "name": "Shahi Dental Clinic",
+      "city": "Muzaffarpur",
+      "vertical": "clinic",
+      "rating": "4.9",
+      "reviews": "1,343",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "brightsmiledentalbjp@gmail.com": {
+      "name": "Bright Smile Dental Hospital",
+      "city": "Bhagalpur",
+      "vertical": "clinic",
+      "rating": "5.0",
+      "reviews": "844",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "vrihiskydeck@gmail.com": {
+      "name": "Vrihi Skydeck Rooftop Restaurant",
+      "city": "Patna",
+      "vertical": "restaurant",
+      "rating": "4.5",
+      "reviews": "1,598",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "feedback@bansivihar.com": {
+      "name": "Bansi Vihar Restaurant",
+      "city": "Patna",
+      "vertical": "restaurant",
+      "rating": "4.1",
+      "reviews": "9,808",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "thegreentreepb@gmail.com": {
+      "name": "PatnaSocial Restro & Rooftop Cafe",
+      "city": "Patna",
+      "vertical": "restaurant",
+      "rating": "3.5",
+      "reviews": "99",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "pramodconfectioneryandfood@gmail.com": {
+      "name": "Paprika Fine Dine Restaurant",
+      "city": "Gaya",
+      "vertical": "restaurant",
+      "rating": "4.2",
+      "reviews": "3,379",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "hotelgoldenmeet@gmail.com": {
+      "name": "The Spice Delight Restaurant",
+      "city": "Muzaffarpur",
+      "vertical": "restaurant",
+      "rating": "4.5",
+      "reviews": "51",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "reservations@theroyalbihar.com": {
+      "name": "The Royal Bihar",
+      "city": "Patna",
+      "vertical": "hotel",
+      "rating": "4.5",
+      "reviews": "1,746",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "info@hotelviraatinn.com": {
+      "name": "Hotel Viraat Inn",
+      "city": "Gaya",
+      "vertical": "hotel",
+      "rating": "4.1",
+      "reviews": "1,102",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "info@hotelatithi.co.in": {
+      "name": "Hotel Atithi",
+      "city": "Muzaffarpur",
+      "vertical": "hotel",
+      "rating": "4.0",
+      "reviews": "3,145",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "reservations@hotelmaxinn.in": {
+      "name": "Hotel Max Inn",
+      "city": "Bhagalpur",
+      "vertical": "hotel",
+      "rating": "3.9",
+      "reviews": "978",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    }
+  }
+}
