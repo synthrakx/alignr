@@ -139,6 +139,296 @@
       "initial_sent_at": null,
       "followup_sent_at": null,
       "status": "QUEUED"
+    },
+    "reservations@thebombaycanteen.com": {
+      "name": "The Bombay Canteen",
+      "city": "Mumbai",
+      "vertical": "restaurant",
+      "rating": "4.5",
+      "reviews": "10880",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "admin@foodmatters.in": {
+      "name": "The Table",
+      "city": "Mumbai",
+      "vertical": "restaurant",
+      "rating": "4.6",
+      "reviews": "3011",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "reservations@opedromumbai.com": {
+      "name": "O Pedro",
+      "city": "Mumbai",
+      "vertical": "restaurant",
+      "rating": "4.6",
+      "reviews": "6407",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "dine@americanobombay.com": {
+      "name": "Americano",
+      "city": "Mumbai",
+      "vertical": "restaurant",
+      "rating": "4.6",
+      "reviews": "2572",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "hello@redcedarhospitality.com": {
+      "name": "Cafe Lota",
+      "city": "New Delhi",
+      "vertical": "restaurant",
+      "rating": "4.4",
+      "reviews": "4588",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "thehouseofdramz@gmail.com": {
+      "name": "Dramz Delhi",
+      "city": "New Delhi",
+      "vertical": "restaurant",
+      "rating": "4.1",
+      "reviews": "8156",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "reservation@28kothi.com": {
+      "name": "28 Kothi",
+      "city": "Jaipur",
+      "vertical": "hotel",
+      "rating": "4.4",
+      "reviews": "196",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "info@bar-palladio.com": {
+      "name": "Bar Palladio",
+      "city": "Jaipur",
+      "vertical": "restaurant",
+      "rating": "4.1",
+      "reviews": "2815",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "jb@jaipurinn.com": {
+      "name": "Jaipur Inn",
+      "city": "Jaipur",
+      "vertical": "hotel",
+      "rating": "4.3",
+      "reviews": "697",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "bungalow@calcuttawalks.com": {
+      "name": "Calcutta Bungalow",
+      "city": "Kolkata",
+      "vertical": "hotel",
+      "rating": "4.3",
+      "reviews": "1000",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "fom@astorkolkata.com": {
+      "name": "The Astor",
+      "city": "Kolkata",
+      "vertical": "hotel",
+      "rating": "4.3",
+      "reviews": "6501",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "hello@siennastore.com": {
+      "name": "Sienna Store & Cafe",
+      "city": "Kolkata",
+      "vertical": "restaurant",
+      "rating": "4.3",
+      "reviews": "2884",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "marketingmanager@malakaspice.com": {
+      "name": "Malaka Spice",
+      "city": "Pune",
+      "vertical": "restaurant",
+      "rating": "4.3",
+      "reviews": "8178",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "smile@punedentalstudio.com": {
+      "name": "Pune Dental Studio",
+      "city": "Pune",
+      "vertical": "clinic",
+      "rating": "4.9",
+      "reviews": "127",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "customercare@houseofmg.com": {
+      "name": "Agashiye",
+      "city": "Ahmedabad",
+      "vertical": "restaurant",
+      "rating": "4.6",
+      "reviews": "6247",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "drshobithshetty@gmail.com": {
+      "name": "Beyond Smiles Dental Clinic",
+      "city": "Bengaluru",
+      "vertical": "clinic",
+      "rating": "4.9",
+      "reviews": "528",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "drcjagadeeshdentalclinic@gmail.com": {
+      "name": "Dr C Jagadeesh's Dental Clinic",
+      "city": "Bengaluru",
+      "vertical": "clinic",
+      "rating": "4.8",
+      "reviews": "850",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "gm@ruralblues.com": {
+      "name": "Rural Blues",
+      "city": "Bengaluru",
+      "vertical": "restaurant",
+      "rating": "4.1",
+      "reviews": "6851",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "support@tapadiadiagnostics.com": {
+      "name": "Tapadia Diagnostics",
+      "city": "Hyderabad",
+      "vertical": "clinic",
+      "rating": "4.2",
+      "reviews": "5768",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "reservations@zonkk.in": {
+      "name": "Zonkk",
+      "city": "Chennai",
+      "vertical": "restaurant",
+      "rating": "4.6",
+      "reviews": "5990",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "unityventures120@gmail.com": {
+      "name": "Café Ciro",
+      "city": "Noida",
+      "vertical": "restaurant",
+      "rating": "4.4",
+      "reviews": "909",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "theivygurugram@gmail.com": {
+      "name": "The Ivy Restaurant",
+      "city": "Gurugram",
+      "vertical": "restaurant",
+      "rating": "4.6",
+      "reviews": "1691",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "info@theprojectcafe.co": {
+      "name": "The Project Cafe",
+      "city": "Ahmedabad",
+      "vertical": "restaurant",
+      "rating": "4.0",
+      "reviews": "4002",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "reservations@amaraanth.com": {
+      "name": "Amaraanth",
+      "city": "Goa",
+      "vertical": "hotel",
+      "rating": "4.9",
+      "reviews": "26",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "reservationfk@thepaul.in": {
+      "name": "Forte Kochi",
+      "city": "Kochi",
+      "vertical": "hotel",
+      "rating": "4.5",
+      "reviews": "1292",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "info@avalondayspa.in": {
+      "name": "Avalon Spa Chandigarh",
+      "city": "Chandigarh",
+      "vertical": "salon",
+      "rating": "4.3",
+      "reviews": "220",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "tshservice@magicpotfoodsco.com": {
+      "name": "The Salt House",
+      "city": "Kolkata",
+      "vertical": "restaurant",
+      "rating": "4.2",
+      "reviews": "1515",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "meeta.makhecha@gmail.com": {
+      "name": "The Flour Works",
+      "city": "Pune",
+      "vertical": "restaurant",
+      "rating": "4.2",
+      "reviews": "6151",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
+    },
+    "info@oye24.com": {
+      "name": "Little Monk",
+      "city": "Indore",
+      "vertical": "restaurant",
+      "rating": "4.6",
+      "reviews": "7524",
+      "initial_sent_at": null,
+      "followup_sent_at": null,
+      "status": "QUEUED"
     }
   }
 }
