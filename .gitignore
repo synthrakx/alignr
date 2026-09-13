@@ -36,3 +36,12 @@ test_st_ram.py
 
 # Day-audit screenshots (kept locally, not in repo)
 Day*.png
+
+# Local media, backups, and temporary utility scripts
+voice_demo.mp4
+portfolio/
+*.day49-control-fix-backup
+load_prospects.py
+ingest_new_leads.py
+show_queued.py
+
