@@ -44,7 +44,7 @@ def show_consent_gate() -> bool:
         **Preregistered on OSF:** [{OSF_URL}]({OSF_URL}) — June 23, 2026, before any data collection.
         A public log of protocol clarifications made before launch is available on OSF.
         
-        **Study design:** You will be randomly assigned to one of two groups, in approximately a 60/40 split:
+        **Study design:** You will be assigned to one of two groups via deterministic 60/40 assignment:
         - **Feedback group (~60%)**: sees your RAS, CII, and SCS numerical scores after each session
         - **Control group (~40%)**: same prompts, no scores shown
         
@@ -74,7 +74,7 @@ def show_consent_gate() -> bool:
     with st.expander("⚠️ Limitations of our measures"):
         st.markdown("""
         - **RAS** measures linguistic similarity, not cognitive processes directly
-        - **CII** is a proxy measure, not a validated psychological instrument
+        - **CII** is an exploratory secondary measure, not a validated psychological instrument
         - **SCS** measures prediction accuracy on semantic dimensions only
         - Results are research data, not personal assessments
         """)
@@ -224,8 +224,8 @@ with tab_sess:
                             c1, c2, c3 = st.columns(3)
                             c1.metric("RAS", f"{res.get('ras', 0):.3f}",
                                       help="Reasoning Alignment Score")
-                            c2.metric("CII", f"{res.get('cii', 0):.3f}",
-                                      help="Cognitive Independence Index")
+                            c2.metric("CII (Exploratory)", f"{res.get('cii', 0):.3f}",
+                                      help="Cognitive Independence Index (Exploratory Metric)")
                             c3.metric("SCS",
                                       f"{res.get('scs'):.3f}"
                                       if res.get("scs") else "N/A",
@@ -270,12 +270,12 @@ preserves cognitive independence over time.
 ### Metrics
 | Metric | Formula | Meaning |
 |--------|---------|---------|
-| **RAS** | cosine_similarity(encode(pre), encode(ai)) | How calibrated was your pre-thinking? |
-| **CII** | (ttk × 0.6) + (min(avg_len/20, 1.0) × 0.4) | Vocabulary diversity and complexity |
+| **RAS** | cosine_similarity(encode(pre), encode(ai)) | How calibrated was your pre-thinking? (Primary Metric) |
+| **CII (Exploratory)** | (ttk × 0.6) + (min(avg_len/20, 1.0) × 0.4) | Vocabulary diversity and complexity (Exploratory Secondary Metric) |
 | **SCS** | cosine_similarity(encode(prediction), encode(ai)) | How well did you predict the AI? |
 
 ### Study Design
-- 60-day randomized controlled trial
+- 60-day study (deterministic 60/40 assignment)
 - ~60% feedback group / ~40% control group
 - Assignment: deterministic SHA-256 hash of email
 - OSF preregistered before any data collection
@@ -283,7 +283,7 @@ preserves cognitive independence over time.
 
 ### Limitations (Important)
 - **RAS** measures linguistic similarity, not cognitive processes directly
-- **CII** is a proxy measure, not a validated psychological instrument
+- **CII** is an exploratory secondary measure, not a validated psychological instrument
 - **SCS** measures prediction accuracy on semantic dimensions only
 - Results are research data, not personal assessments
 
