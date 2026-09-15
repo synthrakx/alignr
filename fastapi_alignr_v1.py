@@ -28,7 +28,7 @@ app = FastAPI(
         "Privacy: text processed locally and discarded. "
         "Only numerical scores returned and stored."
     ),
-    version="2.1.0",
+    version="2.2.0",
 )
 
 app.add_middleware(
@@ -102,7 +102,7 @@ async def health():
     """Health check — must respond fast (no ML model loading)."""
     return {
         "status": "healthy",
-        "version": "2.1.0",
+        "version": "2.2.0",
         "privacy": "text never stored",
         "db_connected": True,
     }
