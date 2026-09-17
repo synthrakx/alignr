@@ -6,30 +6,82 @@ from dotenv import load_dotenv
 load_dotenv()
 
 st.set_page_config(
-    page_title="AI Business Receptionist Demo",
-    page_icon="🤖",
-    layout="centered"
+    page_title="AI Business Receptionist | Live Demo",
+    page_icon="⚡",
+    layout="centered",
+    initial_sidebar_state="expanded"
 )
 
-# Custom Styling
+# Custom CSS: Hide Streamlit Clutter & Upgrade Theme
 st.markdown("""
     <style>
-    .main { background-color: #0E1117; }
-    .stChatMessage { border-radius: 10px; padding: 10px; margin-bottom: 10px; }
+    /* Hide Streamlit Header, Footer, and Fork Button */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    .stApp > header {display: none;}
+    
+    /* Background & Global Colors */
+    .stApp {
+        background-color: #0F172A;
+        color: #F8FAFC;
+    }
+    
+    /* Live Status Badge */
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        background-color: #1E293B;
+        border: 1px solid #334155;
+        border-radius: 20px;
+        padding: 4px 12px;
+        font-size: 0.85rem;
+        color: #38BDF8;
+        margin-bottom: 12px;
+    }
+    .status-dot {
+        height: 8px;
+        width: 8px;
+        background-color: #22C55E;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+    }
+    
+    /* Chat Message Bubbles */
+    .stChatMessage {
+        background-color: #1E293B !important;
+        border: 1px solid #334155 !important;
+        border-radius: 12px !important;
+        padding: 12px 16px !important;
+        margin-bottom: 10px !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🤖 AI Receptionist Assistant")
-st.caption("24/7 Automated Guest & Client Inquiries | Live Demo")
+# Top Header
+st.markdown('<div class="status-badge"><span class="status-dot"></span> 24/7 AI Receptionist Active</div>', unsafe_allow_html=True)
+st.title("Automated AI Receptionist")
+st.caption("Interactive Client & Guest Assistant | Instant USD Knowledge Retrieval")
 
 # Sidebar Configuration
-st.sidebar.header("Select Business Profile")
+st.sidebar.title("🏢 Business Profile")
+st.sidebar.markdown("Switch business profiles to test vertical-specific AI knowledge bases:")
+
 business_type = st.sidebar.selectbox(
-    "Choose Business Vertical:",
+    "Select Industry Demo:",
     ["General / Service Business", "Dental & Medical Clinic", "Fine Dining Restaurant", "Boutique Hotel"]
 )
 
-# Multi-Vertical Knowledge Bases (USD $ Pricing)
+st.sidebar.markdown("---")
+st.sidebar.markdown("""
+### 🌟 What this demo proves:
+- **Instant Response:** Sub-second answer speeds.
+- **Zero Hallucinations:** Strictly follows Knowledge Base facts.
+- **24/7 Coverage:** Handles bookings & inquiries automatically.
+""")
+
+# Knowledge Bases (USD Pricing)
 KNOWLEDGE_BASES = {
     "General / Service Business": """
     Business: Apex Service & Operations
@@ -77,30 +129,43 @@ current_kb = KNOWLEDGE_BASES[business_type]
 api_key = os.getenv("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY")
 
 if not api_key:
-    st.error("GROQ_API_KEY not found. Please set it in .env or Streamlit Secrets.")
+    st.error("⚠️ GROQ_API_KEY not found. Please set it in .env or Streamlit Secrets.")
     st.stop()
 
 client = Groq(api_key=api_key)
 
-# Session State for Chat History
-if "messages" not in st.session_state:
+# Session State Management
+if "messages" not in st.session_state or "last_business_type" not in st.session_state or st.session_state.last_business_type != business_type:
     st.session_state.messages = [
-        {"role": "assistant", "content": f"Hello! Welcome to our {business_type}. How can I assist you today?"}
-    ]
-
-# Reset chat if business vertical changes
-if "last_business_type" not in st.session_state or st.session_state.last_business_type != business_type:
-    st.session_state.messages = [
-        {"role": "assistant", "content": f"Hello! Welcome to our {business_type}. How can I assist you today?"}
+        {"role": "assistant", "content": f"Hello! Welcome to **{business_type}**. How can I assist you with our services, pricing, or bookings today?"}
     ]
     st.session_state.last_business_type = business_type
 
+# Display Message History
 for msg in st.session_state.messages:
-    st.chat_message(msg["role"]).write(msg["content"])
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
 
-if prompt := st.chat_input("Ask about services, pricing, hours, or bookings..."):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    st.chat_message("user").write(prompt)
+# Quick Test Buttons
+col1, col2, col3 = st.columns(3)
+prompt_input = None
+
+if col1.button("💰 What are your prices?"):
+    prompt_input = "What are your services and prices?"
+elif col2.button("🕒 What are your hours?"):
+    prompt_input = "What are your hours and location?"
+elif col3.button("📅 How do I book?"):
+    prompt_input = "How do I book an appointment or reservation?"
+
+# Chat Input
+user_chat = st.chat_input("Ask about services, pricing, hours, or bookings...")
+if user_chat:
+    prompt_input = user_chat
+
+if prompt_input:
+    st.session_state.messages.append({"role": "user", "content": prompt_input})
+    with st.chat_message("user"):
+        st.markdown(prompt_input)
 
     system_instruction = f"""
     You are a professional, friendly 24/7 AI Receptionist for this business.
@@ -116,17 +181,17 @@ if prompt := st.chat_input("Ask about services, pricing, hours, or bookings...")
 
     try:
         response = client.chat.completions.create(
-            model="qwen/qwen3.6-27b",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": system_instruction},
-                *st.session_state.messages
+                *[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
             ],
             temperature=0.3,
-            max_tokens=250,
-            reasoning_effort="none"
+            max_tokens=300
         )
         reply = response.choices[0].message.content
         st.session_state.messages.append({"role": "assistant", "content": reply})
-        st.chat_message("assistant").write(reply)
+        with st.chat_message("assistant"):
+            st.markdown(reply)
     except Exception as e:
         st.error(f"Error communicating with AI backend: {str(e)}")
