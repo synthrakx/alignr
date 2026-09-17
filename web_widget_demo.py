@@ -6,82 +6,66 @@ from dotenv import load_dotenv
 load_dotenv()
 
 st.set_page_config(
-    page_title="AI Business Receptionist | Live Demo",
-    page_icon="⚡",
+    page_title="AI Receptionist Demo",
+    page_icon="✨",
     layout="centered",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS: Hide Streamlit Clutter & Upgrade Theme
+# Premium SaaS UI/UX CSS Overhaul
 st.markdown("""
     <style>
-    /* Hide Streamlit Header, Footer, and Fork Button */
+    /* Hide Streamlit Defaults */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    .stApp > header {display: none;}
     
-    /* Background & Global Colors */
-    .stApp {
-        background-color: #0F172A;
-        color: #F8FAFC;
-    }
+    /* Global Theme */
+    .stApp { background-color: #0B1120; color: #F8FAFC; font-family: 'Inter', sans-serif; }
     
     /* Live Status Badge */
     .status-badge {
-        display: inline-flex;
-        align-items: center;
-        background-color: #1E293B;
-        border: 1px solid #334155;
-        border-radius: 20px;
-        padding: 4px 12px;
-        font-size: 0.85rem;
-        color: #38BDF8;
-        margin-bottom: 12px;
+        display: inline-flex; align-items: center; background-color: #064E3B; 
+        border: 1px solid #047857; border-radius: 999px; padding: 4px 12px; 
+        font-size: 0.75rem; font-weight: 600; color: #34D399; margin-bottom: 1rem;
     }
-    .status-dot {
-        height: 8px;
-        width: 8px;
-        background-color: #22C55E;
-        border-radius: 50%;
-        display: inline-block;
-        margin-right: 8px;
-    }
+    .status-dot { height: 6px; width: 6px; background-color: #10B981; border-radius: 50%; margin-right: 6px; box-shadow: 0 0 8px #10B981;}
     
-    /* Chat Message Bubbles */
-    .stChatMessage {
-        background-color: #1E293B !important;
-        border: 1px solid #334155 !important;
-        border-radius: 12px !important;
-        padding: 12px 16px !important;
-        margin-bottom: 10px !important;
+    /* Chat Bubbles - SaaS Style */
+    .stChatMessage { background-color: transparent !important; border: none !important; padding: 0 !important; margin-bottom: 1.5rem !important; }
+    div[data-testid="stChatMessageContent"] { 
+        background-color: #1E293B; border: 1px solid #334155; border-radius: 12px; 
+        padding: 1rem 1.25rem; font-size: 0.95rem; line-height: 1.5; color: #F1F5F9; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
+    /* Make user messages slightly different to distinguish */
+    div[data-testid="chat-message-user"] div[data-testid="stChatMessageContent"] { background-color: #0F172A; border-color: #3B82F6; }
+    
+    /* Sidebar Polish */
+    [data-testid="stSidebar"] { background-color: #0F172A !important; border-right: 1px solid #1E293B; }
     </style>
 """, unsafe_allow_html=True)
 
-# Top Header
-st.markdown('<div class="status-badge"><span class="status-dot"></span> 24/7 AI Receptionist Active</div>', unsafe_allow_html=True)
-st.title("Automated AI Receptionist")
-st.caption("Interactive Client & Guest Assistant | Instant USD Knowledge Retrieval")
+# --- HEADER ---
+st.markdown('<div class="status-badge"><span class="status-dot"></span> Online & Ready</div>', unsafe_allow_html=True)
+st.title("✨ AI Receptionist")
+st.caption("Test how the AI handles your customers 24/7. Switch industries in the sidebar.")
 
-# Sidebar Configuration
-st.sidebar.title("🏢 Business Profile")
-st.sidebar.markdown("Switch business profiles to test vertical-specific AI knowledge bases:")
-
+# --- SIDEBAR ---
+st.sidebar.title("⚙️ Demo Controls")
 business_type = st.sidebar.selectbox(
-    "Select Industry Demo:",
+    "1. Select Industry:",
     ["General / Service Business", "Dental & Medical Clinic", "Fine Dining Restaurant", "Boutique Hotel"]
 )
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("""
-### 🌟 What this demo proves:
-- **Instant Response:** Sub-second answer speeds.
-- **Zero Hallucinations:** Strictly follows Knowledge Base facts.
-- **24/7 Coverage:** Handles bookings & inquiries automatically.
+**Why Businesses Upgrade:**
+*   **0s Wait Time:** Instant answers.
+*   **100% Accurate:** Only uses your data.
+*   **24/7 Booking:** Never miss a midnight lead.
 """)
 
-# Knowledge Bases (USD Pricing)
+# --- KNOWLEDGE BASES (USD) ---
 KNOWLEDGE_BASES = {
     "General / Service Business": """
     Business: Apex Service & Operations
@@ -125,48 +109,45 @@ KNOWLEDGE_BASES = {
 
 current_kb = KNOWLEDGE_BASES[business_type]
 
-# Initialize Groq Client
+# --- GROQ API INIT ---
 api_key = os.getenv("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY")
-
 if not api_key:
-    st.error("⚠️ GROQ_API_KEY not found. Please set it in .env or Streamlit Secrets.")
+    st.error("⚠️ GROQ_API_KEY missing. Contact developer.")
     st.stop()
-
 client = Groq(api_key=api_key)
 
-# Session State Management
+# --- CHAT STATE ---
+welcome_msg = f"👋 **Welcome to the {business_type} demo!**\n\nI am the AI assistant. Test me by asking about:\n- 💰 **Pricing & Services**\n- 🕒 **Business Hours**\n- 📅 **Booking Policies**\n\nHow can I help you today?"
+
 if "messages" not in st.session_state or "last_business_type" not in st.session_state or st.session_state.last_business_type != business_type:
-    st.session_state.messages = [
-        {"role": "assistant", "content": f"Hello! Welcome to **{business_type}**. How can I assist you with our services, pricing, or bookings today?"}
-    ]
+    st.session_state.messages = [{"role": "assistant", "content": welcome_msg}]
     st.session_state.last_business_type = business_type
 
-# Display Message History
+# Avatars for UI
+avatar_dict = {"assistant": "✨", "user": "👤"}
+
+# Display History
 for msg in st.session_state.messages:
-    with st.chat_message(msg["role"]):
+    with st.chat_message(msg["role"], avatar=avatar_dict[msg["role"]]):
         st.markdown(msg["content"])
 
-# Quick Test Buttons
+# --- CHAT INPUT & LOGIC ---
+prompt_input = st.chat_input("Type your question here...")
+
+# Quick Action Buttons (Placed right above input to act as suggestions)
+st.write("") # Spacer
 col1, col2, col3 = st.columns(3)
-prompt_input = None
-
-if col1.button("💰 What are your prices?"):
-    prompt_input = "What are your services and prices?"
-elif col2.button("🕒 What are your hours?"):
-    prompt_input = "What are your hours and location?"
-elif col3.button("📅 How do I book?"):
-    prompt_input = "How do I book an appointment or reservation?"
-
-# Chat Input
-user_chat = st.chat_input("Ask about services, pricing, hours, or bookings...")
-if user_chat:
-    prompt_input = user_chat
+if col1.button("💰 Services & Pricing", use_container_width=True): prompt_input = "What are your services and prices?"
+if col2.button("🕒 Hours & Location", use_container_width=True): prompt_input = "What are your hours and where are you located?"
+if col3.button("📅 How to Book", use_container_width=True): prompt_input = "How do I make a booking or reservation?"
 
 if prompt_input:
+    # 1. Add User Message
     st.session_state.messages.append({"role": "user", "content": prompt_input})
-    with st.chat_message("user"):
+    with st.chat_message("user", avatar=avatar_dict["user"]):
         st.markdown(prompt_input)
 
+    # 2. System Instruction
     system_instruction = f"""
     You are a professional, friendly 24/7 AI Receptionist for this business.
     Answer the user's question accurately using ONLY the information provided in this Knowledge Base:
@@ -174,24 +155,28 @@ if prompt_input:
     {current_kb}
     
     Rules:
-    1. Keep responses concise, professional, and helpful (under 3-4 sentences).
-    2. Always quote prices in USD ($).
-    3. If the answer is not in the Knowledge Base, politely invite them to leave their contact details for human staff follow-up.
+    1. Keep responses concise, professional, and helpful (2-3 sentences max).
+    2. Always quote prices exactly as shown in USD ($).
+    3. If the answer is not in the Knowledge Base, politely state you don't have that information but human staff will assist them shortly.
     """
 
+    # 3. Call Groq API (FIXED MODEL ID)
     try:
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-8b-instant", # Extremely fast, reliable, current Groq model
             messages=[
                 {"role": "system", "content": system_instruction},
                 *[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
             ],
-            temperature=0.3,
-            max_tokens=300
+            temperature=0.2,
+            max_tokens=200
         )
         reply = response.choices[0].message.content
+        
+        # 4. Show AI Response
         st.session_state.messages.append({"role": "assistant", "content": reply})
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar=avatar_dict["assistant"]):
             st.markdown(reply)
+            
     except Exception as e:
-        st.error(f"Error communicating with AI backend: {str(e)}")
+        st.error(f"Backend Error: {str(e)}")
