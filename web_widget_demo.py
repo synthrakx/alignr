@@ -234,7 +234,7 @@ if prompt_input:
     # 3. Call Groq API (VERIFIED MODEL ID)
     try:
         response = client.chat.completions.create(
-            model="openai/gpt-oss-120b",
+            model="qwen/qwen3.8-27b",
             messages=[
                 {"role": "system", "content": system_instruction},
                 *[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
