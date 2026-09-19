@@ -107,6 +107,10 @@ def get_completer_population(df: pd.DataFrame) -> pd.DataFrame:
 
 def run_primary_test(completers_df: pd.DataFrame) -> dict:
     """THE REGISTERED PRIMARY TEST -- Session 14 RAS, feedback vs control."""
+    # Column normalization for schema drift
+    if "session_num" in completers_df.columns and "session_number" not in completers_df.columns:
+        completers_df["session_number"] = completers_df["session_num"]
+
     session_14 = completers_df[completers_df["session_number"] == PRIMARY_SESSION]
     feedback = session_14[session_14["study_group"] == "feedback"]["ras"].dropna()
     control = session_14[session_14["study_group"] == "control"]["ras"].dropna()

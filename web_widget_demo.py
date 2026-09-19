@@ -107,7 +107,7 @@ st.markdown("""
 st.sidebar.markdown('<div class="brand-header">⚙️ Admin Console</div>', unsafe_allow_html=True)
 business_type = st.sidebar.selectbox(
     "Select Target Industry:",
-    ["General / Service Business", "Dental & Medical Clinic", "Fine Dining Restaurant", "Boutique Hotel"]
+    ["General / Service Business", "Home Services (HVAC & Plumbing)", "Dental & Medical Clinic", "Fine Dining Restaurant", "Boutique Hotel"]
 )
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
@@ -135,6 +135,17 @@ st.write("") # Spacer
 
 # --- KNOWLEDGE BASES (USD) ---
 KNOWLEDGE_BASES = {
+    "Home Services (HVAC & Plumbing)": """
+Business: Apex Plumbing, Heating & Air
+    Hours: 24/7 Emergency Dispatch Available | Standard Office: Mon-Sat 7:00 AM - 7:00 PM EST
+    Services & Pricing:
+    - Service Diagnostic & Inspection Call: $89
+    - Standard Drain Clearing / Plumbing Repair: $140
+    - HVAC Tune-Up & System Maintenance: $115
+    - Water Heater Service & Installation: $250+
+    Location: Serving Metro & Surrounding Counties
+    Dispatch Policy: Instant phone/text dispatch. Emergency calls dispatched within 60 minutes.
+    """,
     "General / Service Business": """
     Business: Apex Service & Operations
     Hours: Mon-Fri 8:00 AM - 6:00 PM EST, Sat 9:00 AM - 2:00 PM EST.
