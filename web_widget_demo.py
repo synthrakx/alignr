@@ -241,8 +241,9 @@ if prompt_input:
 
     Rules:
     1. Keep responses concise, professional, and helpful (2-3 sentences max).
-    2. Always include the dollar sign ($) before any price figure (e.g., $75, $250). NEVER output raw price numbers without the '$' prefix.
-    3. Never hallucinate. If the answer is not in the Knowledge Base, politely state you don't have that information but human staff will assist them shortly.
+    2. ALWAYS include the dollar sign ($) immediately before every price figure (e.g. $89, $140, $250). NEVER output bare numbers without '$'.
+    3. Output plain text ONLY. NEVER wrap prices or numbers in backticks (`), code blocks, or markdown code formatting.
+    4. Never hallucinate. If the answer is not in the Knowledge Base, politely state you don't have that information but human staff will assist them shortly.
     """
 
     # 3. Call Groq API (VERIFIED MODEL ID)
