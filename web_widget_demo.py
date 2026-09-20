@@ -15,11 +15,13 @@ st.set_page_config(
 # --- UNIQUE PREMIUM SAAS CSS (Glassmorphism & Depth) ---
 st.markdown("""
     <style>
-    /* Hide Streamlit Clutter while preserving sidebar toggle control */
+    /* Hide Streamlit Clutter while preserving top-left sidebar toggle */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
-    [data-testid="collapsedControl"] {visibility: visible !important; color: #38BDF8 !important; z-index: 1000001;}
+    header {background: transparent !important;}
+    [data-testid="stHeader"] {background: transparent !important;}
+    [data-testid="stToolbar"] {visibility: hidden;}
+    [data-testid="stDecoration"] {visibility: hidden;}
 
     /* Modern Font & Gradient Background */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
