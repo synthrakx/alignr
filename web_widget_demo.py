@@ -15,19 +15,20 @@ st.set_page_config(
 # --- UNIQUE PREMIUM SAAS CSS (Glassmorphism & Depth) ---
 st.markdown("""
     <style>
-    /* Hide Streamlit Clutter */
+    /* Hide Streamlit Clutter while preserving sidebar toggle control */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    
+    [data-testid="collapsedControl"] {visibility: visible !important; color: #38BDF8 !important; z-index: 1000001;}
+
     /* Modern Font & Gradient Background */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-    .stApp { 
+    .stApp {
         background: radial-gradient(circle at top left, #0f172a, #020617);
-        color: #F8FAFC; 
-        font-family: 'Inter', sans-serif; 
+        color: #F8FAFC;
+        font-family: 'Inter', sans-serif;
     }
-    
+
     /* Sleek Top Brand Header */
     .brand-header {
         font-size: 0.9rem;
@@ -37,7 +38,7 @@ st.markdown("""
         color: #38BDF8;
         margin-bottom: 0.5rem;
     }
-    
+
     /* Main Title Styling */
     .main-title {
         font-size: 2.5rem;
@@ -47,12 +48,12 @@ st.markdown("""
         -webkit-text-fill-color: transparent;
         margin-bottom: 0.2rem;
     }
-    
+
     /* Sidebar "Command Center" Styling */
-    [data-testid="stSidebar"] { 
-        background-color: rgba(15, 23, 42, 0.6) !important; 
+    [data-testid="stSidebar"] {
+        background-color: rgba(15, 23, 42, 0.6) !important;
         backdrop-filter: blur(12px);
-        border-right: 1px solid rgba(255, 255, 255, 0.05); 
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
     }
     .metric-box {
         background: rgba(255, 255, 255, 0.03);
@@ -63,29 +64,29 @@ st.markdown("""
     }
     .metric-label { font-size: 0.75rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;}
     .metric-value { font-size: 1.2rem; font-weight: 600; color: #10B981; }
-    
+
     /* Chat Bubbles - High Contrast & Depth */
     .stChatMessage { background-color: transparent !important; border: none !important; padding: 0 !important; margin-bottom: 1.2rem !important; }
-    
+
     /* AI Assistant Bubble */
-    div[data-testid="chat-message-assistant"] div[data-testid="stChatMessageContent"] { 
-        background: rgba(30, 41, 59, 0.7); 
+    div[data-testid="chat-message-assistant"] div[data-testid="stChatMessageContent"] {
+        background: rgba(30, 41, 59, 0.7);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.08); 
-        border-radius: 0px 16px 16px 16px; 
-        padding: 1rem 1.25rem; font-size: 0.95rem; color: #F1F5F9; 
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 0px 16px 16px 16px;
+        padding: 1rem 1.25rem; font-size: 0.95rem; color: #F1F5F9;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
     }
-    
+
     /* User Bubble */
-    div[data-testid="chat-message-user"] div[data-testid="stChatMessageContent"] { 
-        background: linear-gradient(135deg, #2563EB, #1D4ED8); 
+    div[data-testid="chat-message-user"] div[data-testid="stChatMessageContent"] {
+        background: linear-gradient(135deg, #2563EB, #1D4ED8);
         border: none;
-        border-radius: 16px 0px 16px 16px; 
-        padding: 1rem 1.25rem; font-size: 0.95rem; color: #FFFFFF; 
+        border-radius: 16px 0px 16px 16px;
+        padding: 1rem 1.25rem; font-size: 0.95rem; color: #FFFFFF;
         box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
     }
-    
+
     /* Quick Buttons */
     .stButton>button {
         background: rgba(255, 255, 255, 0.05);
@@ -233,12 +234,12 @@ if prompt_input:
     system_instruction = f"""
     You are an elite, highly professional 24/7 AI Receptionist for this business.
     Answer the user's question accurately using ONLY the information provided in this Knowledge Base:
-    
+
     {current_kb}
-    
+
     Rules:
     1. Keep responses concise, professional, and helpful (2-3 sentences max).
-    2. Always quote prices exactly as shown in USD ($).
+    2. Always include the dollar sign ($) before any price figure (e.g., $75, $250). NEVER output raw price numbers without the '$' prefix.
     3. Never hallucinate. If the answer is not in the Knowledge Base, politely state you don't have that information but human staff will assist them shortly.
     """
 
@@ -254,11 +255,11 @@ if prompt_input:
             max_tokens=200
         )
         reply = response.choices[0].message.content
-        
+
         # 4. Show AI Response
         st.session_state.messages.append({"role": "assistant", "content": reply})
         with st.chat_message("assistant", avatar=avatar_dict["assistant"]):
             st.markdown(reply)
-            
+
     except Exception as e:
         st.error(f"System Error: {str(e)}")
