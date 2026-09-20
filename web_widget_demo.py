@@ -259,6 +259,10 @@ if prompt_input:
         )
         reply = response.choices[0].message.content
 
+        # Python Sanitization: Eliminate backtick code-boxes & enforce $ currency prefixes
+        reply = reply.replace("`", "")
+        reply = re.sub(r'\b(for|at|is|costs?|priced at)\s+(\d+)\b', r'\1 $\2', reply, flags=re.IGNORECASE)
+
         # 4. Show AI Response
         st.session_state.messages.append({"role": "assistant", "content": reply})
         with st.chat_message("assistant", avatar=avatar_dict["assistant"]):
