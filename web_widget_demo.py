@@ -81,6 +81,16 @@ st.markdown("""
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
     }
 
+    /* OVERRIDE INLINE CODE BLOCKS: Removes any code background artifacts */
+    div[data-testid="stChatMessageContent"] code {
+        background-color: transparent !important;
+        color: inherit !important;
+        border: none !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: inherit !important;
+        padding: 0 !important;
+    }
+
     /* User Bubble */
     div[data-testid="chat-message-user"] div[data-testid="stChatMessageContent"] {
         background: linear-gradient(135deg, #2563EB, #1D4ED8);
@@ -240,14 +250,14 @@ if prompt_input:
 
     {current_kb}
 
-    Rules:
-    1. Keep responses concise, professional, and helpful (2-3 sentences max).
-    2. ALWAYS include the dollar sign ($) immediately before every price figure (e.g. $89, $140, $250). NEVER output bare numbers without '$'.
-    3. Output plain text ONLY. NEVER wrap prices or numbers in backticks (`), code blocks, or markdown code formatting.
-    4. Never hallucinate. If the answer is not in the Knowledge Base, politely state you don't have that information but human staff will assist them shortly.
+    Formatting Rules (STRICT):
+    1. Structure your answers cleanly. When listing services or prices, ALWAYS use bullet points (-) with bold titles.
+    2. ALWAYS write prices with a leading dollar sign ($), e.g., $89, $140, $115, $250.
+    3. NEVER wrap prices, numbers, or text in backticks (`), code blocks, or inline code formatting.
+    4. Keep answers clean, readable, and professional.
     """
 
-    # 3. Call Groq API (VERIFIED MODEL ID)
+    # 3. Call Groq API
     try:
         response = client.chat.completions.create(
             model="qwen/qwen3.8-27b",
@@ -255,19 +265,27 @@ if prompt_input:
                 {"role": "system", "content": system_instruction},
                 *[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
             ],
-            temperature=0.2,
-            max_tokens=200
+            temperature=0.1,
+            max_tokens=250
         )
-        reply = response.choices[0].message.content
+        raw_reply = response.choices[0].message.content
 
-        # Python Sanitization: Eliminate backtick code-boxes & enforce $ currency prefixes
-        reply = reply.replace("`", "")
-        reply = re.sub(r'\b(for|at|is|costs?|priced at)\s+(\d+)\b', r'\1 $\2', reply, flags=re.IGNORECASE)
+        # Strip all backticks to destroy code boxes permanently
+        clean_reply = raw_reply.replace("`", "")
+
+        # Auto-inject $ currency symbol if the LLM emits a bare number for prices
+        clean_reply = re.sub(r'(?<!\$)\b(\d{2,4})\b', r'$\1', clean_reply).strip()
+
+        # Terminal Diagnostic Output
+        print(f"\n--- SANITIZER DIAGNOSTIC ---")
+        print(f"RAW:   {raw_reply!r}")
+        print(f"CLEAN: {clean_reply!r}")
+        print(f"----------------------------\n")
 
         # 4. Show AI Response
-        st.session_state.messages.append({"role": "assistant", "content": reply})
+        st.session_state.messages.append({"role": "assistant", "content": clean_reply})
         with st.chat_message("assistant", avatar=avatar_dict["assistant"]):
-            st.markdown(reply)
+            st.markdown(clean_reply)
 
     except Exception as e:
         st.error(f"System Error: {str(e)}")
