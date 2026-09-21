@@ -1,7 +1,6 @@
 # fastapi_alignr_v1.py
 # Day 45 — ALIGNR FastAPI Backend (Postgres/Neon, production-ready)
 # Run:  uvicorn fastapi_alignr_v1:app --reload
-# Docs: http://localhost:8000/docs
 
 import os
 from fastapi import FastAPI, HTTPException
@@ -29,6 +28,9 @@ app = FastAPI(
         "Only numerical scores returned and stored."
     ),
     version="2.2.0",
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None,
 )
 
 app.add_middleware(
