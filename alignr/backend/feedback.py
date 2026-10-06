@@ -1,8 +1,8 @@
-"""
+﻿"""
 alignr/backend/feedback.py
 ALIGNR Narrative from scores only. Never touches user text.
-Uses Ollama qwen2.5-coder:7b via HTTP — local only.
-Day 17 — June 17, 2026
+Uses Ollama qwen2.5-coder:7b via HTTP â€” local only.
+Day 17 â€” June 17, 2026
 """
 import sys
 import requests
@@ -10,7 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-OLLAMA_URL = "http://localhost:11434/api/chat"
+OLLAMA_URL = None  # Disabled local Ollama path
 MODEL = "qwen2.5-coder:7b"
 
 SYSTEM_PROMPT = """Generate concise cognitive feedback from numerical session metrics only.
@@ -20,7 +20,7 @@ OUTPUT: Exactly 2 sentences. Research-grounded. Specific to these numbers.
 Never generic. Never say great job. Reference the actual metric values.
 
 RAS > 0.7: pre-AI thinking closely matched output
-RAS < 0.4: AI genuinely surprised user — learning likely occurred
+RAS < 0.4: AI genuinely surprised user â€” learning likely occurred
 CII > 0.6: vocabulary diversity maintained
 CII < 0.4: writing may be converging toward AI patterns
 SCS > 0.7: user predicted AI output accurately
@@ -55,7 +55,7 @@ def generate_feedback(ras: float, cii: float, scs,
 
 if __name__ == "__main__":
     print("=" * 50)
-    print("  feedback.py — VERIFICATION SUITE")
+    print("  feedback.py â€” VERIFICATION SUITE")
     print("=" * 50)
 
     cases = [
@@ -89,6 +89,6 @@ if __name__ == "__main__":
 
     print()
     if all_pass:
-        print("ALL 3 CASES VERIFIED — scores only, no user text")
+        print("ALL 3 CASES VERIFIED â€” scores only, no user text")
     else:
-        print("FAILURES detected — check output above")
+        print("FAILURES detected â€” check output above")

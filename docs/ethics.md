@@ -11,7 +11,7 @@ title: Ethics Statement
 
 ## What is ALIGNR?
 
-ALIGNR is a research platform studying whether structured pre-AI reflection preserves cognitive independence over 60 days. By using ALIGNR, you are voluntarily participating in a randomized research study.
+ALIGNR is a research platform studying whether structured pre-AI reflection preserves cognitive independence over 60 days. By using ALIGNR, you are voluntarily participating in a preregistered research study with deterministic SHA-256 assignment.
 
 **Study preregistration:** [osf.io/y86mg](https://osf.io/y86mg) (registered September 19, 2026, before any data collection or platform launch)
 
@@ -22,7 +22,7 @@ ALIGNR is a research platform studying whether structured pre-AI reflection pres
 - **Numerical scores only**: RAS, CII, SCS (floating point numbers, e.g. 0.7234)
 - **Task category**: one of five strings (technical / decision / research / creative / learning)
 - **Session timestamps**: date and time of each session
-- **Anonymous user ID**: 16-character hex derived from a one-way SHA-256 hash of your email
+- **Pseudonymous user ID**: 16-character hex derived from a one-way SHA-256 hash of your email
 - **Study group assignment**: "feedback" or "control" (deterministic from your user ID)
 
 ---

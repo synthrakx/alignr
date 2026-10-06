@@ -1,4 +1,4 @@
-# ALIGNR
+ï»¿# ALIGNR
 
 **Author:** Aman Raj ([@synthrakx](https://twitter.com/synthrakx))
 
@@ -10,9 +10,9 @@
 
 **ORCID:** [0009-0009-1346-5230](https://orcid.org/0009-0009-1346-5230)
 
-**Preregistration:** [osf.io/y86mg](https://osf.io/y86mg) — registered June 23, 2026, before any data collection
+**Preregistration:** [osf.io/y86mg](https://osf.io/y86mg) â€” registered June 23, 2026, before any data collection
 
-**Protocol Log:** [osf.io/mv4u7](https://osf.io/mv4u7) — Protocol Clarification & Correction Log
+**Protocol Log:** [osf.io/mv4u7](https://osf.io/mv4u7) â€” Protocol Clarification & Correction Log
 
 ---
 
@@ -32,8 +32,8 @@ Encoder: sentence-transformers/all-MiniLM-L6-v2 (384-dim embeddings) / Path B Di
 
 ## Study Design
 
-- Randomized A/B: ~60% feedback group (sees numerical scores), ~40% control (no scores)
-- Assignment: Deterministic SHA-256 hash of email — same email goes to same group, always
+- Deterministic SHA-256 A/B: ~60% feedback group (sees numerical scores), ~40% control (no scores)
+- Assignment: Deterministic SHA-256 hash of email â€” same email goes to same group, always
 - Duration: 60 days per participant, 14 sessions max (hard cap enforced server-side)
 - Primary test: Independent t-test comparing Session 14 RAS between groups + Cohen's d, alpha = 0.05
 - Supplementary: Bootstrap resampling (1,000 iterations, 95% CI)
@@ -78,7 +78,7 @@ BibTeX:
 
     @misc{raj2026alignr,
       title  = {Does structured pre-AI articulation preserve cognitive independence?
-                A 60-day randomized study},
+                A 60-day preregistered study},
       author = {Raj, Aman},
       year   = {2026},
       month  = {June},
@@ -100,6 +100,6 @@ ALIGNR is not affiliated with any institution.
 
 ## License
 
-MIT — open source. Verify every claim in the source.
+MIT â€” open source. Verify every claim in the source.
 
 ---

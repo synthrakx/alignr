@@ -1,8 +1,8 @@
-"""
+﻿"""
 alignr/frontend/app.py
-ALIGNR Streamlit Frontend v3 — production deploy.
-Day 22 — June 23, 2026 (OSF preregistration live)
-Day 49 — July 19, 2026 (Migrated backend: Railway → Render, Path B onnxruntime deployed)
+ALIGNR Streamlit Frontend v3 â€” production deploy.
+Day 22 â€” June 23, 2026 (OSF preregistration live)
+Day 49 â€” July 19, 2026 (Migrated backend: Railway â†’ Render, Path B onnxruntime deployed)
 Run locally: streamlit run alignr/frontend/app.py
 """
 import hashlib
@@ -21,10 +21,10 @@ def hash_email(email: str) -> str:
     return hashlib.sha256(email.lower().strip().encode()).hexdigest()[:16]
 
 
-st.set_page_config(page_title="ALIGNR", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="ALIGNR", page_icon="ðŸ§ ", layout="wide")
 
 
-# ── CONSENT GATE ─────────────────────────────────────────────
+# â”€â”€ CONSENT GATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def show_consent_gate() -> bool:
     """Returns True only after explicit consent given.
@@ -32,16 +32,16 @@ def show_consent_gate() -> bool:
     if st.session_state.get("consent_given"):
         return True
 
-    st.title("🧠 ALIGNR")
+    st.title("ðŸ§  ALIGNR")
     st.markdown("### Before You Begin")
     st.caption("ALIGNR is a research study. Please read and accept to participate.")
 
-    with st.expander("📋 What is ALIGNR? (click to read)", expanded=True):
+    with st.expander("ðŸ“‹ What is ALIGNR? (click to read)", expanded=True):
         st.markdown(f"""
         ALIGNR is a **voluntary research study** measuring whether structured 
         pre-AI reflection preserves cognitive independence over 60 days.
         
-        **Preregistered on OSF:** [{OSF_URL}]({OSF_URL}) — June 23, 2026, before any data collection.
+        **Preregistered on OSF:** [{OSF_URL}]({OSF_URL}) â€” June 23, 2026, before any data collection.
         A public log of protocol clarifications made before launch is available on OSF.
         
         **Study design:** You will be assigned to one of two groups via deterministic 60/40 assignment:
@@ -51,27 +51,27 @@ def show_consent_gate() -> bool:
         Sessions are capped at 14. Minimum recommended for meaningful data: completing all 14 over 60 days.
         """)
 
-    with st.expander("🔒 What data is collected?"):
+    with st.expander("ðŸ”’ What data is collected?"):
         st.markdown(f"""
         **We collect:** numerical scores only (RAS, CII, SCS), task category, 
-        timestamps, and a 16-character hash of your email (irreversible — 
+        timestamps, and a 16-character hash of your email (irreversible â€” 
         we cannot recover your email from it).
         
         **We NEVER collect:** your pre-thinking text, AI output, prediction 
         text, real email address, or IP address.
         
-        [Verify this in our source code →]({GITHUB_URL})
+        [Verify this in our source code â†’]({GITHUB_URL})
         """)
 
-    with st.expander("🚪 Your rights"):
+    with st.expander("ðŸšª Your rights"):
         st.markdown(f"""
         - Participation is completely voluntary
-        - Withdraw any time: synthrakx@proton.me — data deleted within 5 business days
-        - Results published as aggregate statistics only — never individual
+        - Withdraw any time: synthrakx@proton.me â€” data deleted within 5 business days
+        - Results published as aggregate statistics only â€” never individual
         - Full ethics statement: [{ETHICS_URL}]({ETHICS_URL})
         """)
 
-    with st.expander("⚠️ Limitations of our measures"):
+    with st.expander("âš ï¸ Limitations of our measures"):
         st.markdown("""
         - **RAS** measures linguistic similarity, not cognitive processes directly
         - **CII** is an exploratory secondary measure, not a validated psychological instrument
@@ -81,12 +81,12 @@ def show_consent_gate() -> bool:
 
     st.markdown("---")
     consent = st.checkbox(
-        "✅ I understand this is a research study and I consent to participate on these terms.",
+        "âœ… I understand this is a research study and I consent to participate on these terms.",
         key="consent_checkbox"
     )
 
     if consent:
-        if st.button("Continue to ALIGNR →", type="primary"):
+        if st.button("Continue to ALIGNR â†’", type="primary"):
             st.session_state["consent_given"] = True
             st.rerun()
         return False
@@ -95,7 +95,7 @@ def show_consent_gate() -> bool:
     return False
 
 
-# ── MAIN APP (only runs after consent) ───────────────────────
+# â”€â”€ MAIN APP (only runs after consent) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 if not show_consent_gate():
     st.stop()
@@ -106,33 +106,33 @@ st.markdown(f"""
 <div style="background:#0A1628;border:1px solid #1E3A5F;
 border-radius:8px;padding:10px 16px;margin-bottom:16px;
 color:#80C8FF;font-size:13px;">
-🔒 Your text is processed in memory and immediately discarded.
+ðŸ”’ Your text is processed in memory and immediately discarded.
 Only numerical scores are stored.
-<a href="{GITHUB_URL}" style="color:#4FA8FF">Verify in source →</a>
-| <a href="{ETHICS_URL}" style="color:#4FA8FF">Ethics statement →</a>
-| <a href="{OSF_URL}" style="color:#4FA8FF">OSF preregistration →</a>
+<a href="{GITHUB_URL}" style="color:#4FA8FF">Verify in source â†’</a>
+| <a href="{ETHICS_URL}" style="color:#4FA8FF">Ethics statement â†’</a>
+| <a href="{OSF_URL}" style="color:#4FA8FF">OSF preregistration â†’</a>
 </div>
 """, unsafe_allow_html=True)
 
-st.title("🧠 ALIGNR")
+st.title("ðŸ§  ALIGNR")
 st.caption("Reasoning Alignment Research Platform")
 
 tab_dash, tab_sess, tab_about = st.tabs(
-    ["📊 Dashboard", "➕ New Session", "ℹ️ About"]
+    ["ðŸ“Š Dashboard", "âž• New Session", "â„¹ï¸ About"]
 )
 
-# ── DASHBOARD TAB ────────────────────────────────────────────
+# â”€â”€ DASHBOARD TAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 with tab_dash:
     email = st.text_input("Your email", key="dash_email",
                           placeholder="you@example.com")
     if email:
         uid = hash_email(email)
-        st.caption(f"Anonymous ID: `{uid}` — email hashed, never stored")
+        st.caption(f"Pseudonymous ID: `{uid}` â€” email hashed, never stored")
 
         r = requests.get(f"{API_BASE}/history/{uid}")
 
         if r.status_code == 404:
-            st.info("No sessions yet. Go to ➕ New Session to start.")
+            st.info("No sessions yet. Go to âž• New Session to start.")
         elif r.ok:
             sessions = r.json().get("sessions", [])
             df = pd.DataFrame(sessions)
@@ -175,7 +175,7 @@ with tab_dash:
         else:
             st.error(f"API error: {r.status_code}")
 
-# ── NEW SESSION TAB ──────────────────────────────────────────
+# â”€â”€ NEW SESSION TAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 with tab_sess:
     s_email = st.text_input("Email", key="sess_email",
                             placeholder="you@example.com")
@@ -192,7 +192,7 @@ with tab_sess:
     st.markdown("**Step 2 (optional):** Predict what the AI will say")
     pred = st.text_area("Your prediction", height=80, key="pred")
 
-    st.info("⏸️  Now use your AI tool. Paste the AI response below.")
+    st.info("â¸ï¸  Now use your AI tool. Paste the AI response below.")
     ai_out = st.text_area("AI output", height=120, key="ai_out")
 
     if st.button("Calculate Scores", type="primary"):
@@ -215,7 +215,7 @@ with tab_sess:
 
                     if r.ok:
                         res = r.json()
-                        st.success("✅ Scores calculated and saved.")
+                        st.success("âœ… Scores calculated and saved.")
                         
                         study_group = res.get("study_group", "unknown")
 
@@ -238,7 +238,7 @@ with tab_sess:
                             )
 
                             if res.get("narrative"):
-                                st.info(f"💡 {res['narrative']}")
+                                st.info(f"ðŸ’¡ {res['narrative']}")
                         else:
                             # Control group: confirmation only, no scores per OSF preregistration
                             st.caption(
@@ -255,23 +255,23 @@ with tab_sess:
                     else:
                         st.error(f"API error {r.status_code}: {r.text}")
                 except requests.exceptions.Timeout:
-                    st.error("Request timed out. Backend may be cold-starting — try again in 30 seconds.")
+                    st.error("Request timed out. Backend may be cold-starting â€” try again in 30 seconds.")
                 except requests.exceptions.ConnectionError:
                     st.error("Cannot connect to API. Service may be temporarily down.")
 
-# ── ABOUT TAB ────────────────────────────────────────────────
+# â”€â”€ ABOUT TAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 with tab_about:
     st.markdown(f"""
 **ALIGNR** measures whether structured pre-AI reflection
 preserves cognitive independence over time.
 
-**Preregistered:** [{OSF_URL}]({OSF_URL}) — registered June 23, 2026, before any data collection.
+**Preregistered:** [{OSF_URL}]({OSF_URL}) â€” registered June 23, 2026, before any data collection.
 
 ### Metrics
 | Metric | Formula | Meaning |
 |--------|---------|---------|
 | **RAS** | cosine_similarity(encode(pre), encode(ai)) | How calibrated was your pre-thinking? (Primary Metric) |
-| **CII (Exploratory)** | (ttk × 0.6) + (min(avg_len/20, 1.0) × 0.4) | Vocabulary diversity and complexity (Exploratory Secondary Metric) |
+| **CII (Exploratory)** | (ttk Ã— 0.6) + (min(avg_len/20, 1.0) Ã— 0.4) | Vocabulary diversity and complexity (Exploratory Secondary Metric) |
 | **SCS** | cosine_similarity(encode(prediction), encode(ai)) | How well did you predict the AI? |
 
 ### Study Design
@@ -293,10 +293,10 @@ preserves cognitive independence over time.
 - Email hashed on input, never stored
 
 ### Resources
-- 📋 [Full Ethics Statement]({ETHICS_URL})
-- 📄 [OSF Preregistration]({OSF_URL})
-- 🔓 [Source Code]({GITHUB_URL})
-- 📧 Contact: synthrakx@proton.me
+- ðŸ“‹ [Full Ethics Statement]({ETHICS_URL})
+- ðŸ“„ [OSF Preregistration]({OSF_URL})
+- ðŸ”“ [Source Code]({GITHUB_URL})
+- ðŸ“§ Contact: synthrakx@proton.me
     """)
 
     st.markdown("---")
